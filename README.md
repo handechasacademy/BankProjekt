@@ -1,15 +1,78 @@
-# BankProjekt
+BANK PROJECT REPORT
+Report 1
 
-- Rapportör och datum:Sami ocg 23/09
-- Deltagare (närvaro):Sami,Hande, Vivienne, Sepiedh
-- Sprintmål (veckans DoD):** Implementerat enkla use cases: skapa konto, lista konton, se saldo + Körbar demo
-- Vad vi gjorde: Skapade User-, Account- och Transaction-klasser. Implementerade insättning och uttag med validering. Startade en enkel ConsoleUI för att testa demo.
-- Problem/hinder:**Nej, Helt okej
+Reporter and Date: Sami – 23/09
+Participants (attendance): Sami, Hande, Vivienne, Sepideh
 
+Sprint Goal (Definition of Done for the week):
+Implement basic use cases — create account, list accounts, view balance — and have a working demo.
 
+What We Did:
+Created the User, Account, and Transaction classes.
+Implemented deposit and withdrawal functions with validation.
+Started developing a simple Console UI to test the demo.
 
-- Rapportör och datum:Hande Bengü 30/09
-- Deltagare (närvaro):Sami,Hande, Vivienne, Sepiedh
-- Sprintmål (veckans DoD):** Implementerat enkla use cases: skapa konto, lista konton, se saldo + Körbar demo
-- Vad vi gjorde: Vivienne  var kodansvarig och Skapade ett nytt repository på GitHub eftersom vi har mergeat till main sista gången. Hon även skapade User klass och program.cs, Sami har skapat Account klass, Sepideh har skapat Transaction-klass och Hande var rappörtör och även skapade Bank klass och UML filen. Vivienne och Hande var merge-ansvarig tillsammans. Eftersom vi hade några problem med demo, Hande har skapat et nytt projekt och repo för att börja om och Vivienne kollade om allt bestämmer gällande mappen för filer.
-- Problem/hinder: Vi skapade projekt först på GitHub och hade inte en .sln eller .csproj filer, det var därför vår program funkade inte. Vi försökte lägga till dem senare och pushade men det funkade inte heller. Vi skapade helt nytt projekt och repo på GitHub och alla pushade igen med samma kod.
+Problems / Blockers:
+None – everything worked fine.
+
+Report 2
+
+Reporter and Date: Hande Bengü – 30/09
+Participants (attendance): Sami, Hande, Vivienne, Sepideh
+
+Sprint Goal (Definition of Done for the week):
+Implement basic use cases — create account, list accounts, view balance — and have a working demo.
+
+What We Did:
+Vivienne acted as repository owner and created a new GitHub repository since the previous project had been merged into the main branch.
+She also created the User class and Program.cs file.
+Sami developed the Account class.
+Sepideh created the Transaction class.
+Hande acted as the reporter and created the Bank class and UML diagram.
+Vivienne and Hande were jointly responsible for merging the code.
+
+Because we ran into issues with the demo, Hande created a new project and repository to start fresh, and Vivienne verified that all files were properly structured in the correct folders.
+
+Problems / Blockers:
+Initially, we created the project directly on GitHub without .sln or .csproj files, which caused the program not to run.
+We tried adding them later and pushing again, but it still didn’t work.
+Eventually, we created a completely new project and repository on GitHub and pushed the same code again, which solved the issue.
+
+Week 41
+
+Reporter and Date: Sepideh – 07/10
+Participants (attendance): Sami, Sepideh, Vivienne, Hande
+
+Sprint Goal (Definition of Done for the week):
+Fix errors in the Transaction, Bank, and Account classes.
+
+Create new classes: SavingsAccount and CheckingAccount.
+
+Modify some List collections to include Dictionary and HashSet in at least one instance each.
+
+Implement at least three LINQ queries (Where, OrderBy, GroupBy).
+
+Add error handling for empty lists, null values, and invalid input.
+
+Have a working local demo without crashes.
+
+Role Distribution:
+Hande – Merge manager
+Sepideh – Reporter (with support from Sami and Vivienne)
+Vivienne – Code owner
+Sami – General support and positive energy
+
+What We Did:
+We continued working on the code started in week 39.
+Initially, the program was not runnable, but Vivienne, Hande, and Sami worked in parallel to make it functional.
+The code had minor errors — a few issues in the output and a missing Transaction class.
+Once all errors were fixed and Sepideh added the Transaction class, the code finally worked as expected.
+We then merged all working parts successfully.
+
+Afterward, we began planning for week 40.
+We realized that most of the week 40 tasks were already implemented, except for adding a Dictionary to the Bank class and creating two subclasses that inherit from Account: SavingsAccount and CheckingAccount.
+Once those were completed, we proceeded with the week 41 plan.
+Vivienne and Hande refactored several classes to use different data structures (previously we mostly used List<>).
+
+Problems / Blockers:
+We were slightly behind schedule, so we needed to catch up.
