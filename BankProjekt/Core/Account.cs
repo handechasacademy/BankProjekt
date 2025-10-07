@@ -29,7 +29,7 @@ namespace BankProjekt.Core
             }
         }
 
-        public void Withdraw(decimal amount)
+        public virtual void Withdraw(decimal amount)
         {
             if (amount > 0 && amount <= Balance)
             {
