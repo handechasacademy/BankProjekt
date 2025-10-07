@@ -6,7 +6,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankProject.Core
+namespace BankProjekt.Core
 {
     public class User
     {
