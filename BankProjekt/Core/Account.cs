@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BankProject.Core;
+using System;
 using System.Collections.Generic;
 using System.Transactions;
 
 namespace BankProjekt.Core
 {
-    internal class Account
+    public class Account
     {
         public string AccountNumber { get; set; }
         public decimal Balance { get; set; }
