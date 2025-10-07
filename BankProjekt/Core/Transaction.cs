@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankProjekt.Core
 {
-    internal class Transaction
+    public class Transaction
     {
         public string Id { get; set; }
         public string AccountNumber { get; set; }
