@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 
-namespace BankProjekt.Core
+namespace BankProject.Core
 {
     public class Bank
     {
@@ -18,7 +18,7 @@ namespace BankProjekt.Core
 
         public void OpenAccount(User user, string accountNumber)
         {
-            if (!Users.Any(u => u.UserId == user.UserId))
+            if (!Users.Any(u => u.Id == user.Id))
             {
                 Users.Add(user);
             }
@@ -29,7 +29,7 @@ namespace BankProjekt.Core
                 return;
             }
 
-            var newAccount = new Account(accountNumber, user);
+            var newAccount = new Account(accountNumber, 0m, user);
 
 
             Accounts.Add(newAccount);
@@ -37,7 +37,7 @@ namespace BankProjekt.Core
 
             if (user.Accounts == null)
             {
-                user.Accounts = new List<IAccount>();
+                user.Accounts = new List<Account>();
             }
             user.Accounts.Add(newAccount);
 
