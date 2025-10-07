@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 
-namespace BankProject.Core
+namespace BankProjekt.Core
 {
     public class Bank
     {
