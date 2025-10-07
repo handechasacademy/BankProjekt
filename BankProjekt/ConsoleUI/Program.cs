@@ -1,4 +1,5 @@
 ﻿
+using BankProject.Core;
 using BankProjekt.Core;
 using System;
 using System.Security.Principal;
@@ -128,7 +129,7 @@ namespace BankProjekt.ConsoleUI
             }
             else
             {
-                Console.WriteLine("Invalid amount. Please enter a positive number.");
+                Console.WriteLine("Invalid amount. Please enter a valid amount.");
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -144,7 +145,7 @@ namespace BankProjekt.ConsoleUI
             }
             else
             {
-                Console.WriteLine("Invalid amount. Please enter a positive number.");
+                Console.WriteLine("Invalid amount. Please enter a valid amount.");
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -181,7 +182,7 @@ namespace BankProjekt.ConsoleUI
             }
             else
             {
-                Console.WriteLine("Invalid amount. Please enter a positive number.");
+                Console.WriteLine("Invalid amount. Please enter a valid amount.");
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
