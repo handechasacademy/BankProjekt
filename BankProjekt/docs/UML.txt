@@ -1,0 +1,35 @@
+﻿+--------------------------------------------------+
+|                     Bank                         |
++--------------------------------------------------+
+| - Users: List<User>                              |
+| - Accounts: List<Account>                        |
++---------------------------------------------------------+
+| + OpenAccount(user: User, accountNumber: string): void  |
+| + FindAccount(accountNumber: string): Account           |
++---------------------------------------------------------+
+               |                     |
+               |                     |
+               |                     |
+       +-------+--------+     +------+--------------------------------------+
+       |       User     |     |     Account                                 |
+       +----------------+     +---------------------------------------------+
+       | - UserId       |     | - AccountNumber: string                     |
+       | - Name         |     | - Balance: decimal                          |
+       | - Accounts:    |     +-------------------------------------------------------+
+       |   List<Account>|     | + Deposit(amount: decimal): void               |
+       +----------------+     | + Withdraw(amount: decimal): virtual void             |
+              |               | + GetTransactionHistory(): void                       |
+              |               +-------------------------------------------------------+
+              |                            |                                  /       \
+              |                            |                                 /         \
+              |                            v                                /           \
+              |               +-------------------------+       +----------+-------+    +-------------------+
+              |               |      Transaction        |       |Savings Account   |    |Checking Account   |
+              |               +-------------------------+       +------------------+    +-------------------+
+              |               | - TransactionId: int    |       | + Withdraw:      |    | + Withdraw:       |
+              |               | - Date: DateTime        |       |(amount:decimal)  |    |(amount:decimal)   |
+              |               | - Amount: decimal       |       | override void    |    |  override void    |
+              |               +-------------------------+       |                  |    |                   |
+                                                                |                  |    |                   |
+                                                                |                  |    |                   |
+                                                                +------------------+    +------------------+
