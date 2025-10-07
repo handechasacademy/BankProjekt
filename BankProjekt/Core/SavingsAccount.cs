@@ -14,12 +14,8 @@ namespace BankProjekt.Core
 
         public override void Withdraw(decimal amount)
         {
-            if (amount > 0 && (amount*1.01m) <= Balance)
-            {
-                Balance -= (amount*1.01m);
-                Transactions.Add(new Transaction(Owner.Id, AccountNumber, (amount*1.01m), DateTime.Now, "Withdraw"));
-                Console.WriteLine($"Transferring {amount*1.01m} ({amount*0.01m} fee)");
-            }
+            Console.WriteLine($"Transferring {amount * 1.01m} ({amount * 0.01m} fee)");
+            base.Withdraw(amount*1.01m);
         }
     }
 }
