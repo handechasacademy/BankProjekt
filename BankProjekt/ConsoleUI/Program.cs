@@ -1,5 +1,4 @@
 ﻿
-using BankProject.Core;
 using BankProjekt.Core;
 using System;
 using System.Security.Principal;
