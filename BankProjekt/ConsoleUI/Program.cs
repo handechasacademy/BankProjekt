@@ -187,5 +187,43 @@ namespace BankProjekt.ConsoleUI
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
+
+            public void AddUser(string id, string name)
+        {
+            if (Users.Any(u => u.Id == id))
+            {
+                Console.WriteLine("User with this ID already exists!");
+                return;
+            }
+
+            var newUser = new User(id, name);
+            Users.Add(newUser);
+            Console.WriteLine($"User '{name}' added successfully!");
+        }
+        static void AddUser(Bank bank)
+        {
+            Console.Write("Enter user ID: ");
+            string id = Console.ReadLine();
+
+            Console.Write("Enter user name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Enter password: ");
+            string password = Console.ReadLine();
+
+            try
+            {
+                bank.AddUser(id, name, password);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+
     }
 }
+
+
+

@@ -1,24 +1,38 @@
 ﻿using BankProjekt.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BankProjekt.Core
+public class User
 {
-    public class User
+    
+    public string Id { get; set; }           
+    public string Name { get; set; }
+    public string Role { get; set; }
+    public string Password { get; private set; } 
+    public List<Account> Accounts { get; set; } = new List<Account>();
+
+    public User(string id, string name, string password, string role)
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        Id = id;
+        Name = name;
+        SetPassword(password);
+        Role = role;
+    }
 
-        public List<Account> Accounts { get; set; }
-
-        public User(string id, string name)
+    public bool SetPassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
         {
-            Id = id;
-            Name = name;
+            throw new ArgumentException("Password must be at least 8 characters long.");
+            return false;
         }
+
+        Password = password;
+        return true;
+    }
+
+    public void ShowInfo()
+    {
+        Console.WriteLine($"User: {Name} (ID: {Id}) - Accounts: {Accounts.Count}");
     }
 }

@@ -49,6 +49,20 @@ namespace BankProjekt.Core
         {
             return Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
         }
+        public void AddUser(string id, string name, string password, string role)
+        {
+            if (Users.Any(u => u.Id == id))
+            {
+                Console.WriteLine("User with this ID already exists!");
+                return;
+            }
+
+            var newUser = new User(id, name, password, role);
+            Users.Add(newUser);
+
+            Console.WriteLine($"User '{name}' added successfully!");
+        }
+
     }
 }
 
