@@ -78,3 +78,21 @@ Problems / Blockers:
 We were slightly behind schedule, so we needed to catch up.
 
 Week 42
+Reporter and Date: Vivienne – 14/10
+
+Participants (attendance): Sami, Sepideh, Hande, Vivienne
+
+Sprint Goal (Definition of Done for the week):
+Refactor Program.cs, Bank.cs, and User.cs. Create Admin class. Implement login system with role check (admin vs. user) for differentiated menus.
+
+Role Distribution:
+Vivienne – Lead refactor and integration
+Hande – Bank and Admin class owner
+Sepideh – User class owner
+Sami – Account class owner
+
+What We Did:
+Refactored core classes and added login/role-based menus. Sepideh added Password and Role to User. Hande integrated Dictionary/HashSet into Bank, moved admin funcs to new Admin class with ShowLargestTransaction() and TotalBalanceSummary(). Sami explored LINQ in Account. Vivienne updated Bank.OpenAccount to boolean return for error handling; added UserMenu/AdminMenu and login in Program.cs.
+
+Problems / Blockers:
+Time constraints limited full implementation of all planned methods.
