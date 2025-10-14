@@ -76,3 +76,5 @@ Vivienne and Hande refactored several classes to use different data structures (
 
 Problems / Blockers:
 We were slightly behind schedule, so we needed to catch up.
+
+Week 42
