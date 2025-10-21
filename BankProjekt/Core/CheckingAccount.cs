@@ -8,13 +8,18 @@ namespace BankProjekt.Core
 {
     internal class CheckingAccount : Account
     {
-        public CheckingAccount(string accountNumber, decimal balance, User owner) : base(accountNumber, balance, owner)
-        {
-        }
+        public int AllowedDebt = -5000;
+        public CheckingAccount(string accountNumber, decimal balance, User owner) : base(accountNumber, balance, owner){}
 
         public override void Withdraw(decimal amount)
         {
-            base.Withdraw(amount);
+            if((Balance - amount) < AllowedDebt) //can go into debt
+            {
+                Console.WriteLine($"Your debt is greater than {AllowedDebt}. Withdrawal failed.");
+            }
+            else { base.Withdraw(amount); }
         }
+        
+       
     }
 }
