@@ -17,7 +17,7 @@ namespace BankProjekt.Core
             AccountNumber = accountNumber;
             Balance = balance;
             Owner = owner;
-            Transactions = new List<Transaction>(); // Initialize the list
+            Transactions = new List<Transaction>();
         }
 
         public void Deposit(decimal amount)
@@ -31,11 +31,12 @@ namespace BankProjekt.Core
 
         public virtual void Withdraw(decimal amount)
         {
-            if (amount > 0 && amount <= Balance)
+            if (amount > 0) 
             {
                 Balance -= amount;
-                Transactions.Add(new Transaction(Owner.Id, AccountNumber, amount, DateTime.Now, "Withdraw"));
             }
+            Console.WriteLine($"Withdrew {amount} from {AccountNumber}");
+            Transactions.Add(new Transaction(Owner.Id, AccountNumber, amount, DateTime.Now, "Withdraw"));
         }
 
         public void GetTransactionHistory()
