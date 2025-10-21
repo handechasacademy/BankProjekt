@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankProjekt.Core
+namespace BankProjekt.Core.Accounts
 {
     internal class CheckingAccount : Account
     {
@@ -13,7 +13,7 @@ namespace BankProjekt.Core
 
         public override void Withdraw(decimal amount)
         {
-            if((Balance - amount) < AllowedDebt) //can go into debt
+            if(Balance - amount < AllowedDebt) //can go into debt
             {
                 Console.WriteLine($"Your debt is greater than {AllowedDebt}. Withdrawal failed.");
             }

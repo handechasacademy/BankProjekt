@@ -1,9 +1,8 @@
-﻿using BankProjekt.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Transactions;
 
-namespace BankProjekt.Core
+namespace BankProjekt.Core.Accounts
 {
     public class Account
     {
@@ -12,12 +11,15 @@ namespace BankProjekt.Core
         public User Owner { get; set; }
         public List<Transaction> Transactions { get; set; }
 
-        public Account(string accountNumber, decimal balance, User owner)
+        public decimal FeePercentage {  get; set; }
+
+        public Account(string accountNumber, decimal balance, User owner, decimal feePercentage = 0.0m)
         {
             AccountNumber = accountNumber;
             Balance = balance;
             Owner = owner;
             Transactions = new List<Transaction>();
+            FeePercentage = feePercentage;
         }
 
         public void Deposit(decimal amount)
@@ -35,11 +37,20 @@ namespace BankProjekt.Core
             {
                 Balance -= amount;
             }
-            Console.WriteLine($"Withdrew {amount} from {AccountNumber}");
             Transactions.Add(new Transaction(Owner.Id, AccountNumber, amount, DateTime.Now, "Withdraw"));
         }
 
-        public void GetTransactionHistory()
+
+        public List<Transaction> GetTransactions()
+        {
+            List<Transaction> output = new List<Transaction>();
+            foreach(var tran in Transactions)
+            {
+                output.Add(tran);
+            }
+            return output;
+        }
+        public void ShowTransactionHistory()
         {
             Console.WriteLine("---- TRANSACTION HISTORY ----");
             if (Transactions.Count == 0)
@@ -55,6 +66,11 @@ namespace BankProjekt.Core
                 Console.WriteLine($"Type: {transaction.Type}");
                 Console.WriteLine();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Account of {Owner}(Account number: {AccountNumber}) contains ${Balance}.";
         }
     }
 }
