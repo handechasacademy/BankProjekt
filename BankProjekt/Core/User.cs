@@ -13,16 +13,16 @@ namespace BankProjekt.Core
         public string Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; } // Add this
-        public string Role { get; set; } // Add this, e.g., "admin" or "user"
+        public bool IsAdmin { get; set; } 
 
         public List<Account> Accounts { get; set; }
 
-        public User(string id, string name, string password = "", string role = "user")
+        public User(string id, string name, string password = "")
         {
             Id = id;
             Name = name;
             Password = password;
-            Role = role;
+            IsAdmin = false;
             Accounts = new List<Account>();
         }
     }
