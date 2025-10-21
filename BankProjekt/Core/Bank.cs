@@ -19,34 +19,7 @@ namespace BankProjekt.Core
             Users = new List<User> ();
             Accounts = new Dictionary<string, Account>();
             AccountNumbers = new HashSet<string>();
-        }
-
-        public void OpenAccount(User user, string accountNumber)
-        {
-            if (FindUserById(user.Id) == null)
-            {
-                Users.Add(user);
-            }
-
-            if (!AccountNumbers.Add(accountNumber))
-            {
-                Console.WriteLine("Account number already exists.");
-                return;
-            }
-
-            var newAccount = new Account(accountNumber, 0m, user);
-
-            Accounts[accountNumber] = newAccount;
-
-            if (user.Accounts == null)
-            {
-                user.Accounts = new List<Account>();
-            }
-            user.Accounts.Add(newAccount);
-            
-            Console.WriteLine($"Account created {accountNumber} for user {user.Name}.");
-        }
-
+        }        
         
         public User FindUserById(string id)
         {
