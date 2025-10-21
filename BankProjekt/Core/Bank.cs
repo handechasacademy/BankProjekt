@@ -24,6 +24,11 @@ namespace BankProjekt.Core
         public User FindUserById(string id)
         {
             return Users.FirstOrDefault(u => u.Id == id);
-        }                   
+        }
+
+        public Account FindAccountByAccountNumber(string accountNumber)
+        {
+            return Accounts.Values.FirstOrDefault(a => a.AccountNumber == accountNumber);
+        }
     }
 }
