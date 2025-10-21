@@ -96,3 +96,27 @@ Refactored core classes and added login/role-based menus. Sepideh added Password
 
 Problems / Blockers:
 Time constraints limited full implementation of all planned methods.
+
+Week 43
+
+Reporter and Date: Hande -21/10
+
+Participants (attendance): Vivienne, Sami, Sepideh and Hande
+
+Sprint Goal (Definition of Done for the week):
+Refactor Program.cs, Bank.cs, and Admin.cs to separate business logic from UI, create AccountRepository for transaction and account management with filtering and last-N functionality, implement login with role-based menus, restrict Admin and User access appropriately. Refactor classes SavingsAccount and CheckingAccount and implement SavingsAccount with 3 free withdrawals then fees, and CheckingAccount allowing overdraft up to a set limit.
+
+Role Distribution:
+Vivienne – Responsible for code
+Hande – Responsible for merging and reporter
+Sepideh – Demo 
+Sami – Demo
+
+What We Did:
+Hande:Refactored Bank.cs, and Admin.cs.Created AccountRepository for transaction and account management, including last-N transactions and type-based filtering.
+Vivienne:Implemented SavingsAccount with 3 free withdrawals then fees, and CheckingAccount allowing overdraft up to a set limit.Modified the Withdraw function in Account class to support different account types.Refactored the whole menu for main in order to match the changes made to other classes.
+Sami och Sepideh: Worked on demonstrating the project and preparing the demo presentation.
+
+Problems / Blockers:
+Hande: Uncertainty about the SearchAccount method: instructions said “Search account by account number or username and display in table format,” and it was unclear whether to show all users with the same name or just one, so implemented it to display all users with matching names in case there are any. Unsure where to create the Repositories folder for AccountRepository, since there are multiple folders like ConsoleUI (Program.cs) and Core (all classes). Was unclear if it should go inside Core or as a separate folder. Ended up creating it under Core folder. Lack of time.
+Vivienne: The Account class was not flexible enough for all inherited classes. Our code didn’t fully follow SOLID principles, which caused issues as the project grew and now requires refactoring. Lack of time; too much to do in a short period.
