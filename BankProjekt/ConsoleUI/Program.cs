@@ -1,6 +1,7 @@
 ﻿
 using BankProjekt.Core;
-using BankProjekt.Core;
+using BankProjekt.Core.Accounts;
+using BankProjekt.Core.Users;
 using System;
 using System.Security.Principal;
 
@@ -32,7 +33,7 @@ namespace BankProjekt.ConsoleUI
                 // Add them to User.cs if needed for login & role check.
                 if (user.Password == password) // You'll need to implement this field!
                 {
-                    if (user.Role.ToLower() == "admin") // Also implement 'Role' property in User.cs
+                    if (user.IsAdmin) // Also implement 'Role' property in User.cs
                     {
                         AdminMenu(bank);
                     }

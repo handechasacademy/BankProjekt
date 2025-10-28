@@ -1,4 +1,5 @@
-﻿using BankProjekt.Core;
+﻿using BankProjekt.Core.Accounts;
+using BankProjekt.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -10,6 +11,7 @@ namespace BankProjekt.Core
 {
     public class  Bank
     {
+
         public List<User> Users { get; set; }
         public Dictionary<string, Account> Accounts { get; set; }
         public HashSet<string> AccountNumbers { get; set; }
