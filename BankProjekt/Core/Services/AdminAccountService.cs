@@ -67,7 +67,7 @@ namespace BankProjekt.Core.Services
                     throw new NotFoundException($"No accounts found for user '{user.Name}' (ID: {user.Id}).");
 
                 var allTransactions = user.Accounts
-                                          .SelectMany(a => a.Transactions ?? new List<Transaction>())
+                                          .SelectMany(a => a.Transactions)
                                           .ToList();
 
                 if (allTransactions.Count == 0)
