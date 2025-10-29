@@ -1,6 +1,5 @@
 BANK PROJECT REPORT
 Report 1
-
 Reporter and Date: Sami – 23/09
 Participants (attendance): Sami, Hande, Vivienne, Sepideh
 
@@ -16,7 +15,6 @@ Problems / Blockers:
 None – everything worked fine.
 
 Report 2
-
 Reporter and Date: Hande Bengü – 30/09
 Participants (attendance): Sami, Hande, Vivienne, Sepideh
 
@@ -39,7 +37,6 @@ We tried adding them later and pushing again, but it still didn’t work.
 Eventually, we created a completely new project and repository on GitHub and pushed the same code again, which solved the issue.
 
 Week 41
-
 Reporter and Date: Sepideh – 07/10
 Participants (attendance): Sami, Sepideh, Vivienne, Hande
 
@@ -98,7 +95,6 @@ Problems / Blockers:
 Time constraints limited full implementation of all planned methods.
 
 Week 43
-
 Reporter and Date: Hande -21/10
 
 Participants (attendance): Vivienne, Sami, Sepideh and Hande
@@ -120,3 +116,21 @@ Sami och Sepideh: Worked on demonstrating the project and preparing the demo pre
 Problems / Blockers:
 Hande: Uncertainty about the SearchAccount method: instructions said “Search account by account number or username and display in table format,” and it was unclear whether to show all users with the same name or just one, so implemented it to display all users with matching names in case there are any. Unsure where to create the Repositories folder for AccountRepository, since there are multiple folders like ConsoleUI (Program.cs) and Core (all classes). Was unclear if it should go inside Core or as a separate folder. Ended up creating it under Core folder. Lack of time.
 Vivienne: The Account class was not flexible enough for all inherited classes. Our code didn’t fully follow SOLID principles, which caused issues as the project grew and now requires refactoring. Lack of time; too much to do in a short period.
+
+Week 44
+Reporter and Date: Vivienne – 28/10
+Participants (attendance): Hande, Vivienne, and Sepideh
+Sprint Goal (Definition of Done for the week): Refactor existing codebase and implement functionality based on backlog tasks. Ensure code structure follows SOLID principles and improve separation of concerns between UI, services, and core logic.
+
+Role Distribution:
+Vivienne – Refactorer (responsible for general code refactoring, primarily within the ConsoleUI folder)
+Hande – Refactorer of Admin class and AccountService class
+Sepideh – Responsible for LoginService class and LoginUI class implementation
+
+What We Did:
+Vivienne: Refactored the code, focusing mainly on the ConsoleUI folder to improve structure and adherence to SOLID principles.
+Hande: Refactored the Admin class and moved its methods into a newly created AccountServices class to achieve better separation of concerns.
+Sepideh: Implemented the LoginService and LoginUI classes to enable user login functionality.
+
+Problems / Blockers:
+The existing codebase was poorly structured, making it difficult to add new functionality and significantly complicating the refactoring process.
