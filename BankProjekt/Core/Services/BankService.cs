@@ -15,14 +15,24 @@ namespace BankProjekt.Core.Services
             _bank = bank;
         }
 
-        public bool Transfer(string fromAccountNumber, string toAccountNumber, decimal amount, out string message)
+        public bool Transfer(string fromAccountNumber, string toAccountNumber, decimal amount)
         {
-            fromAccountNumber = new AccountSelectorUI(fromAccountNumber);
-
-
-
-            message = $"Successfully transferred {amount:C} from {source.AccountNumber} to {destination.AccountNumber}.";
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
             return true;
+        }
+
+        public bool HandleWithdraw(Account account)
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return true;
+        }
+        public bool HandleDeposit(Account account)
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return true; 
         }
     }
 }
