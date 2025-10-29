@@ -1,58 +1,51 @@
-﻿using BankProjekt.Core.Accounts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BankProjekt.Core.Accounts;
 using BankProjekt.Core.Users;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
 {
-    internal class AdminAccountService
+    public class BankService
     {
-        private User _user;
         private Bank _bank;
-        public AdminAccountService(User user, Bank bank) { _user = user; _bank = bank; }
+
+        public BankService(Bank bank) { _bank = bank; }
 
         public User FindUserById(string id)
         {
-            try
-            {
-                var user = _bank.Users.FirstOrDefault(u => u.Id == id);
-
-                if (user == null)
-                    throw new NotFoundException($"User with ID '{id}' was not found.");
-
-                return user;
-            }
-            catch (NotFoundException ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
+            var user = _bank.Users.FirstOrDefault(u => u.Id == id);
+            if (user == null)
+                throw new NotFoundException($"User with ID '{id}' was not found.");
+            return user;
         }
 
-        public Account OpenAccount(User user, string accountNumber)
+        public void TransferFundsBetweenUsers(string fromAccountNumber, string toAccountNumber, decimal amount)
         {
-            if (user == null || string.IsNullOrWhiteSpace(accountNumber))
-                throw new InvalidInputException("User or account number is invalid.");
+            if (string.IsNullOrWhiteSpace(fromAccountNumber) || string.IsNullOrWhiteSpace(toAccountNumber))
+                throw new InvalidInputException("Account number cannot be empty.");
 
-            if (FindUserById(user.Id) == null)
-                _bank.Users.Add(user);
+            if (amount <= 0)
+                throw new InvalidInputException("Transfer amount must be positive.");
 
-            if (!_bank.AccountNumbers.Add(accountNumber))
-                throw new DuplicateException($"Account number '{accountNumber}' already exists.");
+            var fromAccount = _bank.Accounts.GetValueOrDefault(fromAccountNumber);
+            var toAccount = _bank.Accounts.GetValueOrDefault(toAccountNumber);
 
-            var account = new Account(accountNumber, 0m, user);
-            _bank.Accounts[accountNumber] = account;
-            (user.Accounts ??= new List<Account>()).Add(account);
+            if (fromAccount == null)
+                throw new NotFoundException($"Source account '{fromAccountNumber}' not found.");
+            if (toAccount == null)
+                throw new NotFoundException($"Destination account '{toAccountNumber}' not found.");
 
-            return account;
+            if (fromAccount.Balance < amount)
+                throw new InvalidOperationException("Insufficient funds in the source account.");
+
+            fromAccount.Withdraw(amount);
+            toAccount.Deposit(amount);
         }
 
-        public List<User> GetAllUsers()
-        {
-            if (!_bank.Users.Any())
-                throw new NotFoundException("No users found.");
-
-            return _bank.Users;
-        }
 
         public List<(User user, Transaction largestDeposit, Transaction largestWithdrawal)> GetLargestTransactions()
         {
@@ -86,6 +79,13 @@ namespace BankProjekt.Core.Services
             return results;
         }
 
+        public List<User> GetAllUsers()
+        {
+            if (!_bank.Users.Any())
+                throw new NotFoundException("No users found.");
+
+            return _bank.Users;
+        }
 
         public List<(User user, decimal totalBalance)> GetTotalBalanceSummaries()
         {
@@ -118,8 +118,6 @@ namespace BankProjekt.Core.Services
 
             return account;
         }
-
-
 
         public (User user, Account account) SearchAccount(string searchInput)
         {
@@ -175,9 +173,6 @@ namespace BankProjekt.Core.Services
 
             return matches;
         }
-
-
-
 
     }
 }

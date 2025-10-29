@@ -26,25 +26,6 @@ namespace BankProjekt.Core.Users
             Accounts = new List<Account>();
         }
 
-        public decimal GetTotalBalance()
-        {
-            decimal output = 0;
-            foreach(var acc in Accounts)
-            {
-                output += acc.Balance;
-            }
-            return output;
-        }
-        public List<Transaction> GetAllTransactions()
-        {
-            List<Transaction> output = new List<Transaction>();
-            foreach(var acc in Accounts)
-            {
-                output.AddRange(acc.GetTransactions());
-            }
-            return output;
-        }
-
         public override string ToString()
         {
             return $"User. Name: {Name}. User ID: {Id}. Password: {Password}. Is Admin: {IsAdmin}. Amount of accounts: {Accounts.Count}";
