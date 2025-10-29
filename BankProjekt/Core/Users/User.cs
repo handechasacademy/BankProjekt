@@ -47,8 +47,15 @@ namespace BankProjekt.Core.Users
 
         public Account FindAccountByAccountNumber(string accountNumber)
         {
+            if (string.IsNullOrWhiteSpace(accountNumber))
+                return null;
+
+            if (Accounts == null || !Accounts.Any())
+                return null;
+
             return Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
         }
+
 
         public override string ToString()
         {

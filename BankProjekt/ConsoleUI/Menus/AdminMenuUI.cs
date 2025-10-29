@@ -1,5 +1,4 @@
-﻿using BankProjekt.ConsoleUI.ServiceUI;
-using BankProjekt.Core;
+﻿using BankProjekt.Core;
 using BankProjekt.Core.Services;
 using BankProjekt.Core.Users;
 using System;
@@ -23,8 +22,8 @@ namespace BankProjekt.ConsoleUI.Menus
 
         public void Run()
         {
-            AddAdminUI addAdmin = new AddAdminUI(_bank);
-            AddUserUI addUser = new AddUserUI(_bank);
+            AddAdmin addAdmin = new AddAdmin(_bank);
+            AddUser addUser = new AddUser(_bank);
 
             while (true)
             {

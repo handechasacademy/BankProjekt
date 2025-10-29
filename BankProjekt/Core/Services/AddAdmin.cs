@@ -1,14 +1,14 @@
 ﻿using BankProjekt.Core;
 using BankProjekt.Core.Users;
 
-namespace BankProjekt.ConsoleUI.ServiceUI
+namespace BankProjekt.Core.Services
 {
-    internal class AddAdminUI
+    internal class AddAdmin
     {
         private readonly Bank _bank;
         private Admin _admin;
 
-        public AddAdminUI(Bank bank) { _bank = bank; }
+        public AddAdmin(Bank bank) { _bank = bank; }
 
         public void Run()
         {

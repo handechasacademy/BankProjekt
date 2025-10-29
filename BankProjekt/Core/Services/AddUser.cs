@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankProjekt.ConsoleUI.ServiceUI
+namespace BankProjekt.Core.Services
 {
-    internal class AddUserUI
+    internal class AddUser
     {
         private readonly Bank _bank;
         private User _user;
 
-        public AddUserUI(Bank bank) { _bank = bank; }
+        public AddUser(Bank bank) { _bank = bank; }
 
         public void Run()
         {

@@ -1,6 +1,6 @@
 ﻿using BankProjekt.ConsoleUI.Menus;
-using BankProjekt.ConsoleUI.ServiceUI;
 using BankProjekt.Core;
+using BankProjekt.Core.Services;
 using BankProjekt.Core.Users;
 using System;
 using System.Collections.Generic;
@@ -23,8 +23,7 @@ namespace BankProjekt.ConsoleUI.MenuUI
 
         public void Run() 
         {
-            AccountSelectorUI accountSelector = new AccountSelectorUI(_user);
-            InternalTransferUI transferUI = new InternalTransferUI(_bank, _user);
+            AccountSelector accountSelector = new AccountSelector(_user);
 
             Console.Clear();
             
@@ -53,7 +52,6 @@ namespace BankProjekt.ConsoleUI.MenuUI
                     case "0":
                         return;
                     case "3":
-                        transferUI.Run(_bank, accountSelector._account);
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Press any key to continue...");
