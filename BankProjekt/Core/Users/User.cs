@@ -24,38 +24,7 @@ namespace BankProjekt.Core.Users
             Password = password;
             IsAdmin = false;
             Accounts = new List<Account>();
-        }
-
-        public decimal GetTotalBalance()
-        {
-            decimal output = 0;
-            foreach (var acc in Accounts)
-            {
-                output += acc.Balance;
-            }
-            return output;
-        }
-        public List<Transaction> GetAllTransactions()
-        {
-            List<Transaction> output = new List<Transaction>();
-            foreach (var acc in Accounts)
-            {
-                output.AddRange(acc.GetTransactions());
-            }
-            return output;
-        }
-
-        public Account FindAccountByAccountNumber(string accountNumber)
-        {
-            if (string.IsNullOrWhiteSpace(accountNumber))
-                return null;
-
-            if (Accounts == null || !Accounts.Any())
-                return null;
-
-            return Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
-        }
-
+        }        
 
         public override string ToString()
         {
