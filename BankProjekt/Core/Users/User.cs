@@ -13,7 +13,7 @@ namespace BankProjekt.Core.Users
         public string Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; } // Add this
-        public bool IsAdmin { get; set; } 
+        public bool IsAdmin { get; set; }
 
         public List<Account> Accounts { get; set; }
 
@@ -29,7 +29,7 @@ namespace BankProjekt.Core.Users
         public decimal GetTotalBalance()
         {
             decimal output = 0;
-            foreach(var acc in Accounts)
+            foreach (var acc in Accounts)
             {
                 output += acc.Balance;
             }
@@ -38,7 +38,7 @@ namespace BankProjekt.Core.Users
         public List<Transaction> GetAllTransactions()
         {
             List<Transaction> output = new List<Transaction>();
-            foreach(var acc in Accounts)
+            foreach (var acc in Accounts)
             {
                 output.AddRange(acc.GetTransactions());
             }

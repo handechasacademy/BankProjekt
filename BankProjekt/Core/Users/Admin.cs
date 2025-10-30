@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BankProjekt.Core.Users
 {
-    internal class Admin : User
+    public class Admin : User
     {
-
+        public Admin(string id, string username, string password) : base(id, username, password){}
     }
 }
