@@ -12,20 +12,15 @@ namespace BankProjekt.Core
     public class  Bank
     {
 
-        public List<User> Users { get; set; }
+        public HashSet<User> Users { get; set; }
         public Dictionary<string, Account> Accounts { get; set; }
         public HashSet<string> AccountNumbers { get; set; }
 
         public Bank ()
         {            
-            Users = new List<User> ();
+            Users = new HashSet<User> ();
             Accounts = new Dictionary<string, Account>();
             AccountNumbers = new HashSet<string>();
-        }        
-        
-        public User FindUserById(string id)
-        {
-            return Users.FirstOrDefault(u => u.Id == id);
         }
     }
 }

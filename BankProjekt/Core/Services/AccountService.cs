@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
 {
@@ -13,9 +14,11 @@ namespace BankProjekt.Core.Services
         private User _user;
         public AccountService(User user) { _user = user; }
 
-        //Add LINQ and methods
-
-
-
+        public decimal GetAccountBalanceSum()
+        {
+            if (_user.Accounts == null)
+                throw new NotFoundException("User has no accounts.");
+            return _user.Accounts.Sum(a => a.Balance);
+        }
     }
 }

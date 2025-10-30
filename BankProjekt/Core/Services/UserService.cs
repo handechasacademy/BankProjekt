@@ -13,31 +13,16 @@ namespace BankProjekt.Core.Services
             _user = user;
         }
 
-        public decimal GetTotalBalance()
-        {
-            if (_user.Accounts == null)
-                throw new NotFoundException("User has no accounts.");
-            return _user.Accounts.Sum(a => a.Balance);
-        }
-
-        public List<Transaction> GetAllTransactions() //user might have 2 accounts
-        {
-            if (_user.Accounts == null)
-                throw new NotFoundException("User has no accounts.");
-            return _user.Accounts
-                .SelectMany(acc => acc.GetTransactions())
-                .ToList();
-        }
-
-        public Account FindAccountByAccountNumber(string accountNumber)
-        {
-            if (string.IsNullOrWhiteSpace(accountNumber))
-                throw new InvalidInputException("Account number is empty.");
-            var account = _user.Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
-            if (account == null)
-                throw new NotFoundException($"Account '{accountNumber}' not found for user.");
-            return account;
-        }
+        //moved to TransactionService.cs
+        //public List<Transaction> GetAllTransactions() //user might have 2 accounts
+        //{
+        //    if (_user.Accounts == null)
+        //        throw new NotFoundException("User has no accounts.");
+        //    return _user.Accounts
+        //        .SelectMany(acc => acc.GetTransactions())
+        //        .ToList();
+        //}
+        
 
         public void Deposit(Account account, decimal amount)
         {
@@ -63,7 +48,7 @@ namespace BankProjekt.Core.Services
         }
 
 
-        public bool TransferFunds(Account fromAccount, Account toAccount, decimal amount)
+        public bool ÚserInternalFundsTransfer(Account fromAccount, Account toAccount, decimal amount) //changed name
         {
             if (fromAccount == null || toAccount == null)
                 throw new NotFoundException("One or both accounts not found.");
@@ -76,11 +61,29 @@ namespace BankProjekt.Core.Services
             return true;
         }
 
-        public List<Transaction> GetTransactionHistory(Account account) //for one account only
+        //moved to TransactionService.cs
+        //public List<Transaction> GetTransactionHistory(Account account) //for one account only
+        //{
+        //    if (account == null)
+        //        throw new NotFoundException("Account not found.");
+        //    return account.GetTransactions();
+        //}
+
+        //Account management
+
+        public Account OpenAccount(Bank bank, string accountNumber)
         {
-            if (account == null)
-                throw new NotFoundException("Account not found.");
-            return account.GetTransactions();
+            if (string.IsNullOrWhiteSpace(accountNumber))
+                throw new InvalidInputException("Account number is invalid.");
+
+            if (!bank.AccountNumbers.Add(accountNumber))
+                throw new DuplicateException($"Account number '{accountNumber}' already exists.");
+
+            var account = new Account(accountNumber, 0m, _user);
+            bank.Accounts[accountNumber] = account;
+            (_user.Accounts ??= new List<Account>()).Add(account);
+
+            return account;
         }
     }
 }
