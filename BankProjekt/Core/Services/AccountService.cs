@@ -1,4 +1,5 @@
-﻿using BankProjekt.Core.Users;
+﻿using BankProjekt.Core.Accounts;
+using BankProjekt.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace BankProjekt.Core.Services
         public AccountService(User user) { _user = user; }
 
         //Add LINQ and methods
-
 
 
 
