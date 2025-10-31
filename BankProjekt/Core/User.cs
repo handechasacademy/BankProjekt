@@ -1,4 +1,5 @@
 ﻿using BankProjekt.Core;
+using BankProjekt.Core.Accounts;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +12,9 @@ public class User
     public string Id { get; set; }           
     public string Name { get; set; }
     public string Role { get; set; }
-    public string Password { get; private set; } 
+    public string Password { get; private set; }
+    public bool IsAdmin { get; set; }
+
     public List<Account> Accounts { get; set; } = new List<Account>();
 
     public User(string id, string name, string password, string role)
@@ -19,6 +22,7 @@ public class User
         Id = id;
         Name = name;
         SetPassword(password);
+        IsAdmin = false;
         Role = role;
     }
 
