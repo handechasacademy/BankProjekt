@@ -21,11 +21,6 @@ namespace BankProjekt.Core
             Users = new List<User> ();
             Accounts = new Dictionary<string, Account>();
             AccountNumbers = new HashSet<string>();
-        }        
-        
-        public User FindUserById(string id)
-        {
-            return Users.FirstOrDefault(u => u.Id == id);
         }
     }
 }

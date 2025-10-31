@@ -23,31 +23,34 @@ namespace BankProjekt.ConsoleUI.MenuUI
 
         public void Run() 
         {
-            AccountSelector accountSelector = new AccountSelector(_user);
+            var finder = new FinderService(_bank);
 
             Console.Clear();
-            
-            accountSelector.Run();
+
+            Console.Write("Account number ? ");
+            string accountNum = Console.ReadLine();
+            var account = finder.FindAccountByAccountNumber(_user, accountNum);
 
             while (true) 
             {
                 Console.Clear();
-                Console.WriteLine($"---- ACCOUNT MENU: {accountSelector._account} ----");
-                Console.WriteLine($"Current Balance: {accountSelector._account.Balance}");
+                Console.WriteLine($"---- ACCOUNT MENU: {account} ----");
+                Console.WriteLine($"Current Balance: {account.Balance}");
                 Console.WriteLine("1. Deposit funds");
                 Console.WriteLine("2. Withdraw funds");
                 Console.WriteLine("3. Transfer funds");
                 Console.WriteLine("4. View transaction history");
                 Console.WriteLine("0. Return to main menu");
-                Console.Write("Enter your choice: ");
 
+                Console.Write("Enter your choice: ");
                 string option = Console.ReadLine();
+
                 Console.WriteLine();
 
                 switch (option) 
                 {
                     case "4":
-                        accountSelector._account.ShowTransactionHistory();
+                        account.ShowTransactionHistory();
                         break;
                     case "0":
                         return;

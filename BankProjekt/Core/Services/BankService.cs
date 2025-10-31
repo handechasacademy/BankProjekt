@@ -15,14 +15,6 @@ namespace BankProjekt.Core.Services
 
         public BankService(Bank bank) { _bank = bank; }
 
-        public User FindUserById(string id)
-        {
-            var user = _bank.Users.FirstOrDefault(u => u.Id == id);
-            if (user == null)
-                throw new NotFoundException($"User with ID '{id}' was not found.");
-            return user;
-        }
-
         public void TransferFundsBetweenUsers(string fromAccountNumber, string toAccountNumber, decimal amount)
         {
             if (string.IsNullOrWhiteSpace(fromAccountNumber) || string.IsNullOrWhiteSpace(toAccountNumber))
@@ -46,40 +38,7 @@ namespace BankProjekt.Core.Services
             toAccount.Deposit(amount);
         }
 
-
-        public List<(User user, Transaction largestDeposit, Transaction largestWithdrawal)> GetLargestTransactions()
-        {
-            if (!_bank.Users.Any())
-                throw new NotFoundException("No users found.");
-
-            var results = new List<(User user, Transaction largestDeposit, Transaction largestWithdrawal)>();
-
-            foreach (var user in _bank.Users)
-            {
-                if (user.Accounts == null)
-                    throw new NotFoundException($"No accounts found for user '{user.Name}' (ID: {user.Id}).");
-
-                var allTransactions = user.Accounts
-                                          .SelectMany(a => a.Transactions)
-                                          .ToList();
-
-                if (allTransactions.Count == 0)
-                    throw new NotFoundException($"No transactions found for user '{user.Name}' (ID: {user.Id}).");
-
-                var largestDeposit = allTransactions.Where(t => t.Amount > 0)
-                                                    .OrderByDescending(t => t.Amount)
-                                                    .FirstOrDefault();
-
-                var largestWithdrawal = allTransactions.Where(t => t.Amount < 0)
-                                                       .OrderBy(t => t.Amount)
-                                                       .FirstOrDefault();
-
-                results.Add((user, largestDeposit, largestWithdrawal));
-            }
-            return results;
-        }
-
-        public List<User> GetAllUsers()
+        public HashSet<User> GetAllUsers()
         {
             if (!_bank.Users.Any())
                 throw new NotFoundException("No users found.");
@@ -106,19 +65,6 @@ namespace BankProjekt.Core.Services
             return results;
         }
 
-        public Account GetAccountWithMostTransactions()
-        {
-            var account = _bank.Accounts.Values
-                .Where(a => a.Transactions != null)
-                .OrderByDescending(a => a.Transactions.Count)
-                .FirstOrDefault();
-
-            if (account == null)
-                throw new NotFoundException("No accounts with transactions found.");
-
-            return account;
-        }
-
         public (User user, Account account) SearchAccount(string searchInput)
         {
             if (!_bank.Users.Any())
@@ -142,36 +88,13 @@ namespace BankProjekt.Core.Services
             throw new NotFoundException($"No account or user found matching '{searchInput}'.");
         }
 
-        //  USER NEEDS TO DECIDE IF THEY WANNA SORT BY AMOUNT OR DATE WHICH HAS TO BE IN UI
-        public List<(DateTime timestamp, string userName, string accountNumber, decimal amount)> SearchTransactionsWithTimestamp(string searchInput)
+        public User CreateUser(string id, string name, string password)
         {
-            var matches = new List<(DateTime, string, string, decimal)>();
-
-            foreach (var user in _bank.Users)
-            {
-                if (user.Accounts.Count == 0)
-                    continue;
-
-                foreach (var account in user.Accounts)
-                {
-                    if (account.Transactions == null)
-                        continue;
-
-                    if (account.AccountNumber.Contains(searchInput, StringComparison.OrdinalIgnoreCase) ||
-                        user.Name.Contains(searchInput, StringComparison.OrdinalIgnoreCase))
-                    {
-                        foreach (var t in account.Transactions)
-                        {
-                            matches.Add((t.Timestamp, user.Name, account.AccountNumber, t.Amount));
-                        }
-                    }
-                }
-            }
-
-            if (matches.Count == 0)
-                throw new NotFoundException($"No transactions found matching '{searchInput}'.");
-
-            return matches;
+            if (_bank.Users.Any(u => u.Id == id))
+                throw new InvalidOperationException("User already exists.");
+            var user = new User(id, name, password);
+            _bank.Users.Add(user);
+            return user;
         }
 
     }
