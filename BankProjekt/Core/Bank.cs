@@ -12,13 +12,13 @@ namespace BankProjekt.Core
     public class  Bank
     {
 
-        public HashSet<User> Users { get; set; }
+        public List<User> Users { get; set; }
         public Dictionary<string, Account> Accounts { get; set; }
         public HashSet<string> AccountNumbers { get; set; }
 
         public Bank ()
         {            
-            Users = new HashSet<User> ();
+            Users = new List<User> ();
             Accounts = new Dictionary<string, Account>();
             AccountNumbers = new HashSet<string>();
         }

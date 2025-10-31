@@ -13,17 +13,6 @@ namespace BankProjekt.Core.Services
             _user = user;
         }
 
-        //moved to TransactionService.cs
-        //public List<Transaction> GetAllTransactions() //user might have 2 accounts
-        //{
-        //    if (_user.Accounts == null)
-        //        throw new NotFoundException("User has no accounts.");
-        //    return _user.Accounts
-        //        .SelectMany(acc => acc.GetTransactions())
-        //        .ToList();
-        //}
-        
-
         public void Deposit(Account account, decimal amount)
         {
             if (account == null)
@@ -60,16 +49,6 @@ namespace BankProjekt.Core.Services
             Deposit(toAccount, amount);
             return true;
         }
-
-        //moved to TransactionService.cs
-        //public List<Transaction> GetTransactionHistory(Account account) //for one account only
-        //{
-        //    if (account == null)
-        //        throw new NotFoundException("Account not found.");
-        //    return account.GetTransactions();
-        //}
-
-        //Account management
 
         public Account OpenAccount(Bank bank, string accountNumber)
         {

@@ -22,8 +22,6 @@ namespace BankProjekt.ConsoleUI.Menus
 
         public void Run()
         {
-            AddAdmin addAdmin = new AddAdmin(_bank);
-            AddUser addUser = new AddUser(_bank);
 
             while (true)
             {
