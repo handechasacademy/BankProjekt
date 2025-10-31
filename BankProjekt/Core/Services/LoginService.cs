@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankProjekt.Core.Services
 {
-    internal class LoginServices
+    internal class LoginService
     {
 
     }
