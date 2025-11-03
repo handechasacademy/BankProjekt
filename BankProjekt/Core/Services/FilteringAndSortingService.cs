@@ -9,7 +9,7 @@ using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
 {
-    internal class FilteringAndSortingService
+    public class FilteringAndSortingService
     {
         private readonly Bank _bank;
 
@@ -28,68 +28,58 @@ namespace BankProjekt.Core.Services
             return account;
         }
 
-        //  USER NEEDS TO DECIDE IF THEY WANNA SORT BY AMOUNT OR DATE WHICH HAS TO BE IN UI
-        public List<(DateTime timestamp, string userName, string accountNumber, decimal amount)> SearchTransactionsWithTimestamp(string searchInput)
+        public List<string> SearchTransactionsWithTimestamp(string searchTerm)
         {
-            var matches = new List<(DateTime, string, string, decimal)>();
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                throw new ArgumentException("Search term cannot be empty.", nameof(searchTerm));
 
+            var summaries = new List<string>();
             foreach (var user in _bank.Users)
             {
-                if (user.Accounts.Count == 0)
+                if (user.Accounts == null || user.Accounts.Count == 0)
                     continue;
-
                 foreach (var account in user.Accounts)
                 {
                     if (account.Transactions == null)
                         continue;
-
-                    if (account.AccountNumber.Contains(searchInput, StringComparison.OrdinalIgnoreCase) ||
-                        user.Name.Contains(searchInput, StringComparison.OrdinalIgnoreCase))
+                    if (account.AccountNumber.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                        user.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                     {
                         foreach (var t in account.Transactions)
                         {
-                            matches.Add((t.Timestamp, user.Name, account.AccountNumber, t.Amount));
+                            summaries.Add($"{t.Timestamp:G} | User: {user.Name} | Account: {account.AccountNumber} | Amount: {t.Amount}");
                         }
                     }
                 }
             }
-
-            if (matches.Count == 0)
-                throw new NotFoundException($"No transactions found matching '{searchInput}'.");
-
-            return matches;
+            if (summaries.Count == 0)
+                throw new NotFoundException($"No transactions found matching '{searchTerm}'.");
+            return summaries;
         }
 
-        public List<(User user, Transaction largestDeposit, Transaction largestWithdrawal)> GetLargestTransactions()
+        public List<string> GetLargestTransactions()
         {
             if (!_bank.Users.Any())
                 throw new NotFoundException("No users found.");
 
-            var results = new List<(User user, Transaction largestDeposit, Transaction largestWithdrawal)>();
-
+            var summary = new List<string>();
             foreach (var user in _bank.Users)
             {
                 if (user.Accounts == null)
-                    throw new NotFoundException($"No accounts found for user '{user.Name}' (ID: {user.Id}).");
-
-                var allTransactions = user.Accounts
-                                          .SelectMany(a => a.Transactions)
-                                          .ToList();
-
-                if (allTransactions.Count == 0)
-                    throw new NotFoundException($"No transactions found for user '{user.Name}' (ID: {user.Id}).");
-
+                    continue;
+                var allTransactions = user.Accounts.SelectMany(a => a.Transactions)
+                                                   .ToList();
                 var largestDeposit = allTransactions.Where(t => t.Amount > 0)
                                                     .OrderByDescending(t => t.Amount)
                                                     .FirstOrDefault();
-
                 var largestWithdrawal = allTransactions.Where(t => t.Amount < 0)
                                                        .OrderBy(t => t.Amount)
                                                        .FirstOrDefault();
 
-                results.Add((user, largestDeposit, largestWithdrawal));
+                summary.Add($"{user.Name} - Largest Deposit: {largestDeposit?.Amount ?? 0}, Largest Withdrawal: {largestWithdrawal?.Amount ?? 0}");
             }
-            return results;
+            return summary;
         }
+    }
     }
 }

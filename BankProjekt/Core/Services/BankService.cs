@@ -43,7 +43,7 @@ namespace BankProjekt.Core.Services
             if (!_bank.Users.Any())
                 throw new NotFoundException("No users found.");
 
-            return _bank.Users;
+            return new HashSet<User>(_bank.Users);
         }
 
         public List<(User user, decimal totalBalance)> GetTotalBalanceSummaries()
@@ -65,36 +65,24 @@ namespace BankProjekt.Core.Services
             return results;
         }
 
-        public (User user, Account account) SearchAccount(string searchInput)
+        public string SearchAccount(string searchInput)
         {
             if (!_bank.Users.Any())
                 throw new NotFoundException("No users found.");
-
             foreach (var user in _bank.Users)
             {
                 if (user.Accounts == null)
                     continue;
-
                 foreach (var account in user.Accounts)
                 {
                     if (account.AccountNumber.Contains(searchInput, StringComparison.OrdinalIgnoreCase) ||
                         user.Name.Contains(searchInput, StringComparison.OrdinalIgnoreCase))
                     {
-                        return (user, account);
+                        return $"User: {user.Name} (ID: {user.Id})\nAccount Number: {account.AccountNumber}";
                     }
                 }
             }
-
             throw new NotFoundException($"No account or user found matching '{searchInput}'.");
-        }
-
-        public User CreateUser(string id, string name, string password)
-        {
-            if (_bank.Users.Any(u => u.Id == id))
-                throw new InvalidOperationException("User already exists.");
-            var user = new User(id, name, password);
-            _bank.Users.Add(user);
-            return user;
         }
 
     }

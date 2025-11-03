@@ -37,7 +37,7 @@ namespace BankProjekt.Core.Services
         }
 
 
-        public bool ÚserInternalFundsTransfer(Account fromAccount, Account toAccount, decimal amount) //changed name
+        public bool UserInternalFundsTransfer(Account fromAccount, Account toAccount, decimal amount)
         {
             if (fromAccount == null || toAccount == null)
                 throw new NotFoundException("One or both accounts not found.");
