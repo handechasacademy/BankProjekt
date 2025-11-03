@@ -63,12 +63,8 @@ namespace BankProjekt.ConsoleUI.Menus
                     case "4":
                         try
                         {
-                            var largestTransactions = _filteringAndSortingService.GetLargestTransactions();
-                            foreach (var result in largestTransactions)
-                            {
-                                Console.WriteLine($"{result.user.Name} - Largest Deposit: {result.largestDeposit?.Amount ?? 0}, " +
-                                                  $"Largest Withdrawal: {result.largestWithdrawal?.Amount ?? 0}");
-                            }
+                            _filteringAndSortingService.GetLargestTransactions()
+                                .ForEach(Console.WriteLine);
                         }
                         catch (NotFoundException ex)
                         {
@@ -107,9 +103,7 @@ namespace BankProjekt.ConsoleUI.Menus
                         string searchInput = Console.ReadLine();
                         try
                         {
-                            var result = _bankService.SearchAccount(searchInput);
-                            Console.WriteLine($"User: {result.user.Name} (ID: {result.user.Id})");
-                            Console.WriteLine($"Account Number: {result.account.AccountNumber}");
+                            Console.WriteLine(_bankService.SearchAccount(searchInput));
                         }
                         catch (NotFoundException ex)
                         {
@@ -121,11 +115,8 @@ namespace BankProjekt.ConsoleUI.Menus
                         string searchTerm = Console.ReadLine();
                         try
                         {
-                            var matches = _filteringAndSortingService.SearchTransactionsWithTimestamp(searchTerm);
-                            foreach (var (timestamp, userName, accountNumber, amount) in matches)
-                            {
-                                Console.WriteLine($"{timestamp:G} | User: {userName} | Account: {accountNumber} | Amount: {amount}");
-                            }
+                            _filteringAndSortingService.SearchTransactionsWithTimestamp(searchTerm)
+                                .ForEach(Console.WriteLine);
                         }
                         catch (NotFoundException ex)
                         {
