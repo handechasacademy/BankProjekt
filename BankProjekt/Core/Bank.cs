@@ -21,6 +21,18 @@ namespace BankProjekt.Core
             Users = new List<User> ();
             Accounts = new Dictionary<string, Account>();
             AccountNumbers = new HashSet<string>();
+
+            var admin1 = new User("Vivienne", "Vivienne123", "1234");
+            admin1.IsAdmin = true;
+            Users.Add(admin1);
+
+            var admin2 = new User("Hande", "Hande123", "1234");
+            admin2.IsAdmin = true;
+            Users.Add(admin2);
+
+            var admin3 = new User("Sepideh", "Sepideh123", "1234");
+            admin3.IsAdmin = true;
+            Users.Add(admin3);
         }
     }
 }

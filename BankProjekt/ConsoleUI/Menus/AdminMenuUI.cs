@@ -1,23 +1,32 @@
-﻿using BankProjekt.Core;
-using BankProjekt.Core.Services;
-using BankProjekt.Core.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankProjekt.ConsoleUI.Menus;
+using BankProjekt.Core;
+using BankProjekt.Core.Services;
+using BankProjekt.Core.Users;
+using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.ConsoleUI.Menus
 {
     internal class AdminMenuUI
     {
         private readonly Bank _bank;
-        private readonly Admin _admin;
+        private readonly User _admin;
+        private readonly BankService _bankService;
+        private readonly UserManagementService _userService;
+        private readonly UserCreationUI _userCreationUI;
+        private readonly FilteringAndSortingService _filteringAndSortingService;
 
-        public AdminMenuUI(Bank bank, Admin admin)
+
+        public AdminMenuUI(Bank bank, User admin)
         {
             _bank = bank;
             _admin = admin;
+            _userService = new UserManagementService(bank);
+            _userCreationUI = new UserCreationUI(_userService);
         }
 
         public void Run()
@@ -30,11 +39,11 @@ namespace BankProjekt.ConsoleUI.Menus
                 Console.WriteLine("1. Show all users");
                 Console.WriteLine("2. Create account for user");
                 Console.WriteLine("3. Create account for admin");
-                Console.WriteLine("3. Show the largest deposit/withdrawal per user");
-                Console.WriteLine("4. Summarize total balance per user in descending order");
-                Console.WriteLine("5. Find the user with the most transactions");
-                Console.WriteLine("6. Search account by account number or username");
-                Console.WriteLine("7. Show transactions with timestamp and username");
+                Console.WriteLine("4. Show the largest deposit/withdrawal per user");
+                Console.WriteLine("5. Summarize total balance per user in descending order");
+                Console.WriteLine("6. Find the user with the most transactions");
+                Console.WriteLine("7. Search account by account number or username");
+                Console.WriteLine("8. Show transactions with timestamp and username");
                 Console.WriteLine("0. Logout");
 
                 Console.Write("Enter choice: ");
@@ -46,13 +55,82 @@ namespace BankProjekt.ConsoleUI.Menus
                         _bank.Users.ForEach(u => Console.WriteLine($"{u.Id} - {u.Name}"));
                         break;
                     case "2":
-                        addUser.Run();
+                        _userCreationUI.AddUserMenu();
                         break;
                     case "3":
-                        addAdmin.Run();
+                        _userCreationUI.AddAdminMenu();
                         break;
                     case "4":
-                        Console.WriteLine("Feature not implemented yet.");
+                        try
+                        {
+                            var largestTransactions = _filteringAndSortingService.GetLargestTransactions();
+                            foreach (var result in largestTransactions)
+                            {
+                                Console.WriteLine($"{result.user.Name} - Largest Deposit: {result.largestDeposit?.Amount ?? 0}, " +
+                                                  $"Largest Withdrawal: {result.largestWithdrawal?.Amount ?? 0}");
+                            }
+                        }
+                        catch (NotFoundException ex)
+                        {
+                            Console.WriteLine("Error: " + ex.Message);
+                        }
+                        break;
+                    case "5":
+                        try
+                        {
+                            var summaries = _bankService.GetTotalBalanceSummaries();
+                            foreach (var summary in summaries)
+                            {
+                                Console.WriteLine($"{summary.user.Name} (ID: {summary.user.Id}) - Total Balance: {summary.totalBalance}");
+                            }
+                        }
+                        catch (NotFoundException ex)
+                        {
+                            Console.WriteLine("Error: " + ex.Message);
+                        }
+                        break;
+                    case "6":
+                        try
+                        {
+                            var account = _filteringAndSortingService.GetAccountWithMostTransactions();
+                            Console.WriteLine($"Account Number: {account.AccountNumber}");
+                            Console.WriteLine($"Owner: {account.Owner.Name} (ID: {account.Owner.Id})");
+                            Console.WriteLine($"Number of Transactions: {account.Transactions.Count}");
+                        }
+                        catch (NotFoundException ex)
+                        {
+                            Console.WriteLine("Error: " + ex.Message);
+                        }
+                        break;
+                    case "7":
+                        Console.Write("Enter account number or username: ");
+                        string searchInput = Console.ReadLine();
+                        try
+                        {
+                            var result = _bankService.SearchAccount(searchInput);
+                            Console.WriteLine($"User: {result.user.Name} (ID: {result.user.Id})");
+                            Console.WriteLine($"Account Number: {result.account.AccountNumber}");
+                        }
+                        catch (NotFoundException ex)
+                        {
+                            Console.WriteLine("Error: " + ex.Message);
+                        }
+                        break;
+                    case "8":
+                        Console.Write("Enter account number or username to search transactions: ");
+                        string searchTerm = Console.ReadLine();
+                        try
+                        {
+                            var matches = _filteringAndSortingService.SearchTransactionsWithTimestamp(searchTerm);
+                            foreach (var (timestamp, userName, accountNumber, amount) in matches)
+                            {
+                                Console.WriteLine($"{timestamp:G} | User: {userName} | Account: {accountNumber} | Amount: {amount}");
+                            }
+                        }
+                        catch (NotFoundException ex)
+                        {
+                            Console.WriteLine("Error: " + ex.Message);
+                        }
                         break;
                     case "0":
                         return;

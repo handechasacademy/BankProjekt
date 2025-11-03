@@ -9,7 +9,7 @@ using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
 {
-    internal class FilteringAndSortingService
+    public class FilteringAndSortingService
     {
         private readonly Bank _bank;
 
@@ -29,7 +29,7 @@ namespace BankProjekt.Core.Services
         }
 
         //  USER NEEDS TO DECIDE IF THEY WANNA SORT BY AMOUNT OR DATE WHICH HAS TO BE IN UI
-        public List<(DateTime timestamp, string userName, string accountNumber, decimal amount)> SearchTransactionsWithTimestamp(string searchInput)
+        public List<(DateTime timestamp, string userName, string accountNumber, decimal amount)> SearchTransactionsWithTimestamp(string searchTerm)
         {
             var matches = new List<(DateTime, string, string, decimal)>();
 
@@ -43,8 +43,8 @@ namespace BankProjekt.Core.Services
                     if (account.Transactions == null)
                         continue;
 
-                    if (account.AccountNumber.Contains(searchInput, StringComparison.OrdinalIgnoreCase) ||
-                        user.Name.Contains(searchInput, StringComparison.OrdinalIgnoreCase))
+                    if (account.AccountNumber.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                        user.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                     {
                         foreach (var t in account.Transactions)
                         {
@@ -55,7 +55,7 @@ namespace BankProjekt.Core.Services
             }
 
             if (matches.Count == 0)
-                throw new NotFoundException($"No transactions found matching '{searchInput}'.");
+                throw new NotFoundException($"No transactions found matching '{searchTerm}'.");
 
             return matches;
         }

@@ -1,9 +1,11 @@
 ﻿
 using BankProjekt.ConsoleUI.Menus;
 using BankProjekt.ConsoleUI.MenuUI;
+using BankProjekt.ConsoleUI;
 using BankProjekt.Core;
 using BankProjekt.Core.Accounts;
 using BankProjekt.Core.Users;
+using BankProjekt.Core.Services;
 using System;
 using System.Security.Principal;
 
@@ -14,23 +16,31 @@ namespace BankProjekt.ConsoleUI
         static void Main(string[] args)
         {
             Bank bank = new Bank();
-            AdminMenuUI adminMenu;
-            UserMenuUI userMenu;
 
-            Console.WriteLine("----BANK----");
+            var loginService = new LoginService(bank.Users);
+            var loginUI = new LoginUI(loginService);
 
-            User LoggedInUser = Login(bank);
-
-            if (LoggedInUser.IsAdmin == false)
+            while (true)
             {
-                userMenu = new UserMenuUI(bank, LoggedInUser);
-                userMenu.Run();
+                Console.WriteLine("----BANK----");
+                User loggedInUser = loginUI.Run();
+
+                if (loggedInUser == null) 
+                    break;
+
+                if (loggedInUser.IsAdmin)
+                {
+                    var adminMenu = new AdminMenuUI(bank, loggedInUser);
+                    adminMenu.Run();
+                }
+                else
+                {
+                    var userMenu = new UserMenuUI(bank, loggedInUser);
+                    userMenu.Run();
+                }
             }
-            else
-            {
-                adminMenu = new AdminMenuUI(bank, LoggedInUser);
-                adminMenu.Run();
-            }
+
+            Console.WriteLine("So long and thanks for all the fish!");
         }
     }
 }

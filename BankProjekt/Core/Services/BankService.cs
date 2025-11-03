@@ -43,7 +43,7 @@ namespace BankProjekt.Core.Services
             if (!_bank.Users.Any())
                 throw new NotFoundException("No users found.");
 
-            return _bank.Users;
+            return new HashSet<User>(_bank.Users);
         }
 
         public List<(User user, decimal totalBalance)> GetTotalBalanceSummaries()
@@ -86,16 +86,7 @@ namespace BankProjekt.Core.Services
             }
 
             throw new NotFoundException($"No account or user found matching '{searchInput}'.");
-        }
-
-        public User CreateUser(string id, string name, string password)
-        {
-            if (_bank.Users.Any(u => u.Id == id))
-                throw new InvalidOperationException("User already exists.");
-            var user = new User(id, name, password);
-            _bank.Users.Add(user);
-            return user;
-        }
+        }        
 
     }
 }
