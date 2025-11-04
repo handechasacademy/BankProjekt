@@ -25,8 +25,8 @@ namespace BankProjekt.ConsoleUI.Menus
         {
             _bank = bank;
             _admin = admin;
-            _userService = new UserManagementService(bank);
-            _userCreationUI = new UserCreationUI(_userService);
+            _userManagementService = new UserManagementService(bank);
+            _userCreationUI = new UserCreationUI(_bank);
         }
 
         public void Run()
