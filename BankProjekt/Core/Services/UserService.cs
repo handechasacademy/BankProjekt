@@ -50,7 +50,7 @@ namespace BankProjekt.Core.Services
             return true;
         }
 
-        public Account OpenAccount(Bank bank, string accountNumber)
+        public Account OpenAccount(Bank bank, User user, string accountNumber)
         {
             if (string.IsNullOrWhiteSpace(accountNumber))
                 throw new InvalidInputException("Account number is invalid.");
@@ -58,9 +58,9 @@ namespace BankProjekt.Core.Services
             if (!bank.AccountNumbers.Add(accountNumber))
                 throw new DuplicateException($"Account number '{accountNumber}' already exists.");
 
-            var account = new Account(accountNumber, 0m, _user);
+            var account = new Account(accountNumber, 0m, user);
             bank.Accounts[accountNumber] = account;
-            (_user.Accounts ??= new List<Account>()).Add(account);
+            (user.Accounts ??= new List<Account>()).Add(account);
 
             return account;
         }

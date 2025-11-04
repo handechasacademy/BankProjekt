@@ -23,7 +23,6 @@ namespace BankProjekt.ConsoleUI
             while (true)
             {
                 Console.WriteLine("----BANK----");
-                loginUI.Run();
                 User loggedInUser = loginUI.Run();
 
 

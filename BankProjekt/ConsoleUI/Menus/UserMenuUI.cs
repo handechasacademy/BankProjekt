@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.ConsoleUI.MenuUI
 {
@@ -13,11 +14,13 @@ namespace BankProjekt.ConsoleUI.MenuUI
     {
         private readonly Bank _bank;
         private readonly User _user;
+        private readonly UserService _userService;
 
         public UserMenuUI(Bank bank, User user)
         {
             _bank = bank;
             _user = user;
+            _userService = new UserService(_user);
         }
 
         public void Run()
@@ -38,7 +41,17 @@ namespace BankProjekt.ConsoleUI.MenuUI
                 switch (choice)
                 {
                     case "1":
-                        
+                        Console.WriteLine("Enter an account number to create.");
+                        string accountNumber = Console.ReadLine();
+                        try
+                        {
+                            _userService.OpenAccount(_bank, _user, accountNumber);
+                        }
+                        catch (InvalidInputException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        Console.WriteLine($"Account created with account number {accountNumber}");
                         break;
                     case "2":
                         accountManagerMenu.Run();

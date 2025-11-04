@@ -2,6 +2,7 @@
 using BankProjekt.Core;
 using BankProjekt.Core.Services;
 using BankProjekt.Core.Users;
+using static BankProjekt.Core.Exceptions.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,7 @@ namespace BankProjekt.ConsoleUI.MenuUI
 
                 switch (option) 
                 {
+
                     case "4":
                         account.ShowTransactionHistory();
                         break;
