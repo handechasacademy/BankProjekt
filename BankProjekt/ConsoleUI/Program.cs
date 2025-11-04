@@ -23,24 +23,25 @@ namespace BankProjekt.ConsoleUI
             while (true)
             {
                 Console.WriteLine("----BANK----");
-                User loggedInUser = loginUI.Run();
+                loginUI.Run();
+                User loggedInUser = loginUI.LoggedIn;
 
-                if (loggedInUser == null) 
-                    break;
 
+                if (loggedInUser == null)
+                {
+                    return;
+                }
                 if (loggedInUser.IsAdmin)
                 {
                     var adminMenu = new AdminMenuUI(bank, loggedInUser);
                     adminMenu.Run();
                 }
-                else
+                else if (loggedInUser.IsAdmin == false)
                 {
                     var userMenu = new UserMenuUI(bank, loggedInUser);
                     userMenu.Run();
                 }
             }
-
-            Console.WriteLine("So long and thanks for all the fish!");
         }
     }
 }
