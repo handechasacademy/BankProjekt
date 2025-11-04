@@ -9,11 +9,11 @@ using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
 {
-    public class FilteringAndSortingService
+    public class BankFilteringService
     {
         private readonly Bank _bank;
 
-        public FilteringAndSortingService(Bank bank) { _bank = bank; }
+        public BankFilteringService(Bank bank) { _bank = bank; }
 
         public Account GetAccountWithMostTransactions()
         {

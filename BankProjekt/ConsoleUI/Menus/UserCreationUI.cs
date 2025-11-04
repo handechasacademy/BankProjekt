@@ -1,16 +1,21 @@
 ﻿using System;
+using BankProjekt.Core;
 using BankProjekt.Core.Services;
+using BankProjekt.Core.Users;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.ConsoleUI.Menus
 {
     public class UserCreationUI
     {
-        private readonly UserManagementService _userService;
+        private readonly Bank _bank;
+        private readonly UserManagementService _userManagementService;
 
-        public UserCreationUI(UserManagementService userService)
+        public UserCreationUI(Bank bank) 
         {
-            _userService = userService;
+            _bank = bank;
+            _userManagementService = new UserManagementService(_bank);
+
         }
 
         public void AddUserMenu()
@@ -22,15 +27,9 @@ namespace BankProjekt.ConsoleUI.Menus
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
 
-            try
-            {
-                _userService.CreateUser(id, name, password);
-                Console.WriteLine("User created.");
-            }
-            catch (DuplicateException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
+            User newUser;
+            newUser = _userManagementService.CreateUser(id, name, password);
+            Console.WriteLine($"User [{newUser.Name}] created.");
         }
 
         public void AddAdminMenu()
@@ -42,15 +41,9 @@ namespace BankProjekt.ConsoleUI.Menus
             Console.WriteLine("Enter password:");
             string password = Console.ReadLine();
 
-            try
-            {
-                _userService.AddAdmin(id, name, password);
-                Console.WriteLine("Admin created.");
-            }
-            catch (DuplicateException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-            }
+            User newUser;
+            newUser = _userManagementService.AddAdmin(id, name, password);
+            Console.WriteLine($"Admin [{newUser}] created.");
         }
     }
 }
