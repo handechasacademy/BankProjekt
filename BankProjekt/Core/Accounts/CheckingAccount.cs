@@ -1,26 +1,38 @@
 ﻿using BankProjekt.Core.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankProjekt.Core.Accounts
 {
     internal class CheckingAccount : Account
     {
-        public int AllowedDebt = -5000;
-        public CheckingAccount(string accountNumber, decimal balance, User owner) : base(accountNumber, balance, owner){}
+        public decimal AllowedDebt;
+        public decimal InterestRate;
 
-        public override void Withdraw(decimal amount)
+        public CheckingAccount(string accountNumber, decimal balance, User owner)
+            : base(accountNumber, balance, owner)
         {
-            if(Balance - amount < AllowedDebt) //can go into debt
-            {
-                Console.WriteLine($"Your debt is greater than {AllowedDebt}. Withdrawal failed.");
-            }
-            else { base.Withdraw(amount); }
+            AllowedDebt = -balance * 5m;
         }
-        
-       
+
+        public decimal Withdraw(decimal amount)
+        {
+            decimal newBalance = Balance - amount;
+
+            if (newBalance < AllowedDebt)
+            {
+                Console.WriteLine($"Your debt would exceed {AllowedDebt:C}. Withdrawal failed.");
+            }
+            else
+            {
+                base.Withdraw(amount);
+
+                if (Balance < 0)
+                {
+                    decimal interest = Math.Abs(Balance) * InterestRate;
+                    Console.WriteLine($"You now have a debt of {Balance:C}. Interest will be {interest:C} per period.");
+                }
+            }
+            return newBalance;
+        }
     }
 }

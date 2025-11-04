@@ -16,9 +16,9 @@ namespace BankProjekt.ConsoleUI.Menus
         private readonly Bank _bank;
         private readonly User _admin;
         private readonly BankService _bankService;
-        private readonly UserManagementService _userService;
+        private readonly UserManagementService _userManagementService;
         private readonly UserCreationUI _userCreationUI;
-        private readonly FilteringAndSortingService _filteringAndSortingService;
+        private readonly BankFilteringService _filteringAndSortingService;
 
 
         public AdminMenuUI(Bank bank, User admin)
