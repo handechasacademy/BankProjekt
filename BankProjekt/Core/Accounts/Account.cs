@@ -32,13 +32,14 @@ namespace BankProjekt.Core.Accounts
             }
         }
 
-        public virtual void Withdraw(decimal amount)
+        public virtual decimal Withdraw(decimal amount)
         {
             if (amount > 0) 
             {
                 Balance -= amount;
             }
             Transactions.Add(new Transaction(Owner.Id, AccountNumber, amount, DateTime.Now, "Withdraw"));
+            return Balance;
         }
 
 

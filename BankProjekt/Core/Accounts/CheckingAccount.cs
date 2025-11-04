@@ -14,7 +14,7 @@ namespace BankProjekt.Core.Accounts
             AllowedDebt = -balance * 5m;
         }
 
-        public decimal Withdraw(decimal amount)
+        public override decimal Withdraw(decimal amount)
         {
             decimal newBalance = Balance - amount;
 

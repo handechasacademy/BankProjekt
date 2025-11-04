@@ -20,8 +20,15 @@ namespace BankProjekt.Core.Services
 
         public User AddAdmin(string id, string name, string password)
         {
-            if (_bank.Users.Any(u => u.Id == id))
-                throw new DuplicateException("User already exists.");
+            try
+            {
+                if (_bank.Users.Any(u => u.Id == id))
+                    throw new DuplicateException("User already exists.");
+            } catch(DuplicateException ex)
+            {
+                Console.WriteLine("ERROR: "+ex.Message);
+            }
+
             var admin = new User(id, name, password);
             admin.IsAdmin = true;
             _bank.Users.Add(admin);
