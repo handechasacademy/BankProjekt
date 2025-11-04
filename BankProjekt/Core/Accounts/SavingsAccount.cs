@@ -13,7 +13,7 @@ namespace BankProjekt.Core.Accounts
         private int _withdrawalCounter = 0;
         public SavingsAccount(string accountNumber, decimal balance, User owner) : base(accountNumber, balance, owner, BankConfig.GetFeePercentage){}
 
-        public decimal Withdraw(decimal amount)
+        public override decimal Withdraw(decimal amount)
         {
             if(_withdrawalCounter > 3)
             {

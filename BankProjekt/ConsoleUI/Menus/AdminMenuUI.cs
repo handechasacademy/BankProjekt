@@ -126,7 +126,7 @@ namespace BankProjekt.ConsoleUI.Menus
                     case "0":
                         return;
                     default:
-                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("Invalid choice...");
                         break;
                 }
                 Console.WriteLine("Press any key to continue...");
