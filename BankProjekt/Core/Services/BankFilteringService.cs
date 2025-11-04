@@ -81,5 +81,4 @@ namespace BankProjekt.Core.Services
             return summary;
         }
     }
-    }
 }
