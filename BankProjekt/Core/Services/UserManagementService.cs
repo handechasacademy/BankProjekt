@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BankProjekt.Core.Users;
+﻿using BankProjekt.Core.Users;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
@@ -20,14 +15,8 @@ namespace BankProjekt.Core.Services
 
         public User AddAdmin(string id, string name, string password)
         {
-            try
-            {
-                if (_bank.Users.Any(u => u.Id == id))
-                    throw new DuplicateException("User already exists.");
-            } catch(DuplicateException ex)
-            {
-                Console.WriteLine("ERROR: "+ex.Message);
-            }
+            if (_bank.Users.Any(u => u.Id == id))
+                throw new DuplicateException("User already exists.");
 
             var admin = new User(id, name, password);
             admin.IsAdmin = true;

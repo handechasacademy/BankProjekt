@@ -55,10 +55,24 @@ namespace BankProjekt.ConsoleUI.Menus
                         _bank.Users.ForEach(u => Console.WriteLine($"{u.Id} - {u.Name}"));
                         break;
                     case "2":
-                        _userCreationUI.AddUserMenu();
+                        try
+                        {
+                            _userCreationUI.AddUserMenu();
+                        }
+                        catch(DuplicateException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }                        
                         break;
                     case "3":
-                        _userCreationUI.AddAdminMenu();
+                        try
+                        {
+                            _userCreationUI.AddAdminMenu();
+                        }
+                        catch (DuplicateException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
                     case "4":
                         try
