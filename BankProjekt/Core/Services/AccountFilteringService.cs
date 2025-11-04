@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankProjekt.Core.Repositories
+namespace BankProjekt.Core.Services
 {
-    public class AccountRepository
+    public class AccountFilteringService
     {
         private readonly List<User> _users;
 
-        public AccountRepository(List<User> users)
+        public AccountFilteringService(List<User> users)
         {
             _users = users;
         }

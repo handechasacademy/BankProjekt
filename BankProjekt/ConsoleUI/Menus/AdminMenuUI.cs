@@ -16,17 +16,17 @@ namespace BankProjekt.ConsoleUI.Menus
         private readonly Bank _bank;
         private readonly User _admin;
         private readonly BankService _bankService;
-        private readonly UserManagementService _userService;
+        private readonly UserManagementService _userManagementService;
         private readonly UserCreationUI _userCreationUI;
-        private readonly FilteringAndSortingService _filteringAndSortingService;
+        private readonly BankFilteringService _filteringAndSortingService;
 
 
         public AdminMenuUI(Bank bank, User admin)
         {
             _bank = bank;
             _admin = admin;
-            _userService = new UserManagementService(bank);
-            _userCreationUI = new UserCreationUI(_userService);
+            _userManagementService = new UserManagementService(bank);
+            _userCreationUI = new UserCreationUI(_userManagementService);
         }
 
         public void Run()
