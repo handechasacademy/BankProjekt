@@ -28,7 +28,9 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
             Console.WriteLine("                                                      \r\n |\\/|  _. ._   _.  _   _     /\\   _  _  _      ._ _|_ \r\n |  | (_| | | (_| (_| (/_   /--\\ (_ (_ (_) |_| | | |_ \r\n                   _|                                 ");
             Console.Write("Account number: ");
             string accountNum = Console.ReadLine();
-            var account = finder.FindAccountByAccountNumber(_user, accountNum);
+            var account = _handler.GetValidatedAccount(accountNum);
+            if (account == null) //had to add this if statement otherwise they get stuck in the loop
+                return;
 
             while (true)
             {
