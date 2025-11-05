@@ -29,35 +29,79 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"---- Admin Menu ({_admin.Name}) ----");
-                Console.WriteLine("1. Show all users");
-                Console.WriteLine("2. Create account for user");
-                Console.WriteLine("3. Create account for admin");
-                Console.WriteLine("4. Show the largest deposit/withdrawal per user");
+                //Admin
+                Console.WriteLine("                      \r\n  /\\   _| ._ _  o ._  \r\n /--\\ (_| | | | | | | \r\n                      ");
+                Console.WriteLine(_admin.Name);
+                Console.WriteLine();
+                Console.WriteLine("1. Users");
+                Console.WriteLine("2. Create user");
+                Console.WriteLine("3. Create admin");
+                Console.WriteLine("4. Largest deposit/withdrawal per user");
                 Console.WriteLine("5. Summarize total balance per user in descending order");
-                Console.WriteLine("6. Find the user with the most transactions");
-                Console.WriteLine("7. Search account by account number or username");
-                Console.WriteLine("8. Show transactions with timestamp and username");
+                Console.WriteLine("6. User with most transactions");
+                Console.WriteLine("7. Search account by account number");
+                Console.WriteLine("8. Transactions with timestamp and username");
                 Console.WriteLine("0. Logout");
 
-                Console.Write("Enter choice: ");
+                Console.Write("\nChoice: ");
                 string choice = Console.ReadLine();
+                Console.WriteLine();
 
                 switch (choice)
                 {
-                    case "1": _handler.ShowAllUsers(); break;
-                    case "2": _handler.HandleCreateUser(); break;
-                    case "3": _handler.HandleCreateAdmin(); break;
-                    case "4": _handler.ShowLargestTransactions(); break;
-                    case "5": _handler.ShowBalanceSummary(); break;
-                    case "6": _handler.ShowAccountWithMostTransactions(); break;
-                    case "7": _handler.HandleSearchAccount(); break;
-                    case "8": _handler.ShowTransactionsWithTimestamp(); break;
+                    case "1":
+                        Console.Clear();
+                        //"Users"
+                        Console.WriteLine("                 \r\n | |  _  _  ._ _ \r\n |_| _> (/_ | _> \r\n                 ");
+                        _handler.ShowAllUsers(); 
+                        break;
+                    case "2":
+                        Console.Clear();
+                        //Create User
+                        Console.WriteLine("  _                                   \r\n /  ._ _   _. _|_  _    | |  _  _  ._ \r\n \\_ | (/_ (_|  |_ (/_   |_| _> (/_ |  \r\n                                      ");
+                        _handler.HandleCreateUser();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        //Create Admin
+                        Console.WriteLine("  _                                          \r\n /  ._ _   _. _|_  _     /\\   _| ._ _  o ._  \r\n \\_ | (/_ (_|  |_ (/_   /--\\ (_| | | | | | | \r\n                                             ");
+                        _handler.HandleCreateAdmin(); 
+                        break;
+                    case "4": 
+                        Console.Clear();
+                        //Largest Transactions
+                        Console.WriteLine("                           ___                                     \r\n |   _. ._ _   _   _ _|_    | ._ _. ._   _  _.  _ _|_ o  _  ._   _ \r\n |_ (_| | (_| (/_ _>  |_    | | (_| | | _> (_| (_  |_ | (_) | | _> \r\n           _|                                                      ");
+                        _handler.ShowLargestTransactions();
+                        break;
+                    case "5":
+                        Console.Clear();
+                        //Balance Summary
+                        Console.WriteLine("  _                          __                          \r\n |_)  _. |  _. ._   _  _    (_      ._ _  ._ _   _. ._   \r\n |_) (_| | (_| | | (_ (/_   __) |_| | | | | | | (_| | \\/ \r\n                                                      /  ");
+                        _handler.ShowBalanceSummary(); 
+                        break;
+                    case "6": 
+                        Console.Clear();
+                        //Account With Most Transactions
+                        Console.WriteLine("                                                                  ___                                     \r\n  /\\   _  _  _      ._ _|_   \\    / o _|_ |_    |\\/|  _   _ _|_    | ._ _. ._   _  _.  _ _|_ o  _  ._   _ \r\n /--\\ (_ (_ (_) |_| | | |_    \\/\\/  |  |_ | |   |  | (_) _>  |_    | | (_| | | _> (_| (_  |_ | (_) | | _> \r\n                                                                                                          ");
+                        _handler.ShowAccountWithMostTransactions();
+                        break;
+                    case "7":
+                        Console.Clear();
+                        //Account Search
+                        Console.WriteLine("                              __                  \r\n  /\\   _  _  _      ._ _|_   (_   _   _. ._ _ |_  \r\n /--\\ (_ (_ (_) |_| | | |_   __) (/_ (_| | (_ | | \r\n                                                  ");
+                        _handler.HandleSearchAccount();
+                        break;
+                    case "8":
+                        Console.Clear();
+                        //Transactions With Timestamp
+                        Console.WriteLine(" ___                                                          ___                                 \r\n  | ._ _. ._   _  _.  _ _|_ o  _  ._   _   \\    / o _|_ |_     | o ._ _   _   _ _|_  _. ._ _  ._  \r\n  | | (_| | | _> (_| (_  |_ | (_) | | _>    \\/\\/  |  |_ | |    | | | | | (/_ _>  |_ (_| | | | |_) \r\n                                                                                              |   ");
+                        _handler.ShowTransactionsWithTimestamp();
+                        break;
                     case "0": return;
                     default: Console.WriteLine("Invalid choice."); break;
                 }
 
-                Console.WriteLine("Press any key to continue...");
+                Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
             }
         }

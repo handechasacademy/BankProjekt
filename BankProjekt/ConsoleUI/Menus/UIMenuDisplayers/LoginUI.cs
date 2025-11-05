@@ -18,20 +18,26 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("LOGIN PAGE");
+                //"bank" header
+                Console.WriteLine("oooooooooo.        .o.       ooooo      ooo oooo    oooo \r\n`888'   `Y8b      .888.      `888b.     `8' `888   .8P'  \r\n 888     888     .8\"888.      8 `88b.    8   888  d8'    \r\n 888oooo888'    .8' `888.     8   `88b.  8   88888[      \r\n 888    `88b   .88ooo8888.    8     `88b.8   888`88b.    \r\n 888    .88P  .8'     `888.   8       `888   888  `88b.  \r\no888bood8P'  o88o     o8888o o8o        `8  o888o  o888o \r\n                                                         ");
+                Console.WriteLine("Stockholm 1 \n\n");
+                //Login
+                Console.WriteLine("                  \r\n |   _   _  o ._  \r\n |_ (_) (_| | | | \r\n         _|       ");
                 Console.WriteLine("1. Login");
                 Console.WriteLine("0. Exit");
-                Console.Write("Enter choice: ");
+
+                Console.Write("\nChoice: ");
                 string choice = Console.ReadLine();
+                Console.WriteLine();
 
                 try
                 {
                     switch (choice)
                     {
                         case "1":
-                            Console.Write("Enter user ID or username: ");
+                            Console.Write("Username: ");
                             string userIdOrName = Console.ReadLine();
-                            Console.Write("Enter password: ");
+                            Console.Write("Password: ");
                             string password = ReadPassword();
                             Console.WriteLine();
 
@@ -39,7 +45,6 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
                             if (user != null)
                             {
-                                Console.WriteLine($"Welcome, {user.Name}!");
                                 return user;
                             }
                             else
@@ -54,6 +59,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
                         default:
                             Console.WriteLine("Invalid choice.");
+                            Console.WriteLine("\nPress any key to continue...");
                             Console.ReadKey();
                             break;
                     }
@@ -61,7 +67,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 catch (InvalidInputException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Console.WriteLine("Press any key to continue...");
+                    Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
                 }
             }

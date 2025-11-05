@@ -19,12 +19,12 @@ namespace BankProjekt.Core.Accounts
             {
                 decimal fee = withdrawAmount * BankConfig.GetFeePercentage;
                 base.Withdraw(withdrawAmount + fee);
-                Console.WriteLine($"Fee of {fee:C} applied (withdrawal #{_withdrawalCounter + 1}).");
+                Console.WriteLine($"\nFee of {fee:C} applied (withdrawal #{_withdrawalCounter + 1}).");
             }
             else
             {
                 base.Withdraw(withdrawAmount);
-                Console.WriteLine($"Free withdrawal #{_withdrawalCounter + 1} of 3.");
+                Console.WriteLine($"\nFree withdrawal #{_withdrawalCounter + 1} of 3.");
             }
 
             _withdrawalCounter++;

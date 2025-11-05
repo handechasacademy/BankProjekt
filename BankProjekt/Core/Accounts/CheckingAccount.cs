@@ -30,7 +30,7 @@ namespace BankProjekt.Core.Accounts
                 if (Balance < 0)
                 {
                     decimal interest = Math.Abs(Balance) * InterestRate;
-                    Console.WriteLine($"You now have a debt of {Balance:C}. Interest will be {interest:C} per period.");
+                    Console.WriteLine($"\nYou now have a debt of {Balance:C}. Interest will be {interest:C} per period.");
                 }
             }
             return newBalance;
