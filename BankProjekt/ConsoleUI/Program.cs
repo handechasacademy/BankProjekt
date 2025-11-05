@@ -14,31 +14,8 @@ namespace BankProjekt.ConsoleUI
     {
         static void Main(string[] args)
         {
-            Bank bank = new Bank();
-            var loginService = new LoginService(bank.Users);
-            var loginUI = new LoginUI(loginService);
-
-            while (true)
-            {
-                Console.WriteLine("---- BANK ----");
-                User loggedInUser = loginUI.Run();
-
-                if (loggedInUser == null)
-                {
-                    return;
-                }
-
-                if (loggedInUser.IsAdmin)
-                {
-                    var adminMenu = new AdminMenuUI(bank, loggedInUser);
-                    adminMenu.Run();
-                }
-                else if(loggedInUser.IsAdmin == false)
-                {
-                    var userMenu = new UserMenuUI(bank, loggedInUser);
-                    userMenu.Run();
-                }
-            }
+            BankApplication application = new BankApplication();
+            application.Run();
         }
     }
 }
