@@ -1,35 +1,60 @@
-﻿+--------------------------------------------------+
-|                     Bank                         |
-+--------------------------------------------------+
-| - Users: List<User>                              |
-| - Accounts: List<Account>                        |
-+---------------------------------------------------------+
-| + OpenAccount(user: User, accountNumber: string): void  |
-| + FindAccount(accountNumber: string): Account           |
-+---------------------------------------------------------+
-               |                     |
-               |                     |
-               |                     |
-       +-------+--------+     +------+--------------------------------------+
-       |       User     |     |     Account                                 |
-       +----------------+     +---------------------------------------------+
-       | - UserId       |     | - AccountNumber: string                     |
-       | - Name         |     | - Balance: decimal                          |
-       | - Accounts:    |     +-------------------------------------------------------+
-       |   List<Account>|     | + Deposit(amount: decimal): void               |
-       +----------------+     | + Withdraw(amount: decimal): virtual void             |
-              |               | + GetTransactionHistory(): void                       |
-              |               +-------------------------------------------------------+
-              |                            |                                  /       \
-              |                            |                                 /         \
-              |                            v                                /           \
-              |               +-------------------------+       +----------+-------+    +-------------------+
-              |               |      Transaction        |       |Savings Account   |    |Checking Account   |
-              |               +-------------------------+       +------------------+    +-------------------+
-              |               | - TransactionId: int    |       | + Withdraw:      |    | + Withdraw:       |
-              |               | - Date: DateTime        |       |(amount:decimal)  |    |(amount:decimal)   |
-              |               | - Amount: decimal       |       | override void    |    |  override void    |
-              |               +-------------------------+       |                  |    |                   |
-                                                                |                  |    |                   |
-                                                                |                  |    |                   |
-                                                                +------------------+    +------------------+
+﻿+----------------------------------------------------+
+|                     Bank                           |  Domain Layer
++----------------------------------------------------+
+| - Users: List<User>                                |
+| - Accounts: Dictionary<string, Account>            |
++----------------------------------------------------+
+| + OpenAccount(user: User, accountNumber: string,   |
+|          accountType: string, currency: string):   |
+|          Account                                   |
+| + FindAccount(accountNumber: string): Account      |
++----------------------------------------------------+
+                          |
+                          | 
+                          |
+                   +------v-------------------+
+                   |     User                 |
+                   +--------------------------+
+                   | - Id: string             |
+                   | - Name: string           |
+                   | - Password: string       |
+                   | - IsAdmin: bool          |
+                   | - Accounts: List<Account>|
+                   +--------------------------+
+                          |
+                          |
+                          |
+            +-------------v--------------------+
+            |         Account                  |<----------------------------+
+            +----------------------------------+                             |
+            | - AccountNumber: string          |                             |
+            | - Balance: decimal               |                             |
+            | - Currency: string               |                             |
+            | - AccountType: string            |                             |
+            | - Owner: User                    |                             |
+            | - Transactions: List<Transaction>|                             |
+            +----------------------------------------------+                 |
+            | + Deposit(amount: decimal): void             |                 |
+            | + Withdraw(amount: decimal): virtual decimal |                 |
+            | + GetTransactions(): List<Transaction>       |                 |composition
+            +----------------------------------------------+                 |
+                     ^                                                       | 
+                  /     \  Inheritance                                       |
+                 /       \                                                   |
++-------------------+    +-------------------+                               |
+| SavingsAccount    |    | CheckingAccount   |                               |
++-------------------+    +-------------------+                               |
+| - _withdrawalCnt  |    | - InterestRate    |                               |
+| + Withdraw()      |    | - AllowedDebt     |                               |
++-------------------+    | + Withdraw()      |                               |
+                         +-------------------+                               |
+                                                                             |
+                            +---------------------------+                    |
+                            |      Transaction          |                    |
+                            +---------------------------+                    |
+                            | - Id: string              |                    |
+                            | - AccountNumber: string   |                    | 
+                            | - Amount: decimal         |                    |
+                            | - Timestamp: DateTime     |--------------------+
+                            | - Type: string            |
+                            +---------------------------+

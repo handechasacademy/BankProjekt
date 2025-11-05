@@ -1,0 +1,46 @@
+﻿+------------+
+| Program.cs |     // Entry point
++-----+------+
+      |
+      v
++-----------------------+
+|     UI Layer          |  // Menu displays
++-----------------------+
+| LoginUI               |
+| UserMenuUI            |
+| AdminMenuUI           |
+| AccountManagerMenuUI  |
+|....                   |
++-----------------------+
+      |
+      v
++---------------------------+
+|   Menu Handler Layer      |  // Handles user actions, validation
++---------------------------+
+| LoginHandler              |
+| UserMenuHandler           |
+| AdminMenuHandler          |
+| AccountManagerMenuHandler |
++---------------------------+
+      |
+      v
++-----------------------------+
+|     Service Layer           |  // Business logic/services
++-----------------------------+
+| LoginService                |
+| UserService                 |
+| AdminService                |
+| BankService                 |
+| AccountService              |
++-----------------------------+
+      |
+      v
++------------------------------+
+|      Domain Layer            |  // Models
++------------------------------+
+| Account                      |
+|  - Checking/SavingsAccount   |
+| User                         |
+| Transaction                  |
+| Bank                         |
++------------------------------+
