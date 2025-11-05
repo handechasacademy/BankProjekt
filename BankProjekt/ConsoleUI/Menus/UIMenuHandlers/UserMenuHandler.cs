@@ -41,13 +41,13 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
                 return;
             }
 
-            if (currency != "SEK" && currency != "USD" && currency != "EUR")
+            if ((!currency.Contains("sek", StringComparison.OrdinalIgnoreCase)) && (!currency.Contains( "usd", StringComparison.OrdinalIgnoreCase)) && (!currency.Contains("eur", StringComparison.OrdinalIgnoreCase)))
             {
                 Console.WriteLine("\nInvalid currency. Use SEK, USD, or EUR.");
                 return;
             }
 
-            if (accountType != "Checking" && accountType != "Savings")
+            if ((!accountType.Contains("Checking", StringComparison.OrdinalIgnoreCase)) && (!accountType.Contains("Savings", StringComparison.OrdinalIgnoreCase)))
             {
                 Console.WriteLine("\nInvalid account type. Use 'Checking' or 'Savings'.");
                 return;
