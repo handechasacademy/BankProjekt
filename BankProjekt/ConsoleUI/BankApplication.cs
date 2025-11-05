@@ -31,7 +31,10 @@ namespace BankProjekt.ConsoleUI
 
                 if (loggedInUser == null)
                 {
-                    Console.WriteLine("Goodbye!");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Clear();
+                    Console.WriteLine("╔═╗┌─┐  ╦  ┌─┐┌┐┌┌─┐   ┌─┐┌┐┌┌┬┐  ╔╦╗┬ ┬┌─┐┌┐┌┬┌─┌─┐  ┌─┐┌─┐┬─┐  ╔═╗┬  ┬    ┌┬┐┬ ┬┌─┐  ╔═╗┬┌─┐┬ ┬┬\r\n╚═╗│ │  ║  │ │││││ ┬   ├─┤│││ ││   ║ ├─┤├─┤│││├┴┐└─┐  ├┤ │ │├┬┘  ╠═╣│  │     │ ├─┤├┤   ╠╣ │└─┐├─┤│\r\n╚═╝└─┘  ╩═╝└─┘┘└┘└─┘┘  ┴ ┴┘└┘─┴┘   ╩ ┴ ┴┴ ┴┘└┘┴ ┴└─┘  └  └─┘┴└─  ╩ ╩┴─┘┴─┘   ┴ ┴ ┴└─┘  ╚  ┴└─┘┴ ┴o");
+                    Console.ForegroundColor = ConsoleColor.White;
                     return;
                 }
                 RunUserSession(loggedInUser);
@@ -42,8 +45,10 @@ namespace BankProjekt.ConsoleUI
         {
             if (loggedInUser.IsAdmin)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 var adminMenu = new AdminMenuUI(_bank, loggedInUser);
                 adminMenu.Run();
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else if (loggedInUser.IsAdmin == false)
             {
