@@ -26,7 +26,8 @@ namespace BankProjekt.Core.Services
 
             if (fromAccount == null || toAccount == null)
                 throw new NotFoundException("Account not found.");
-
+            if (fromAccount == toAccount)
+                throw new InvalidInputException("Cannot send money to the same account.");
             if (transferToUseramount <= 0)
                 throw new InvalidInputException("Amount must be positive.");
             if (fromAccount.Balance < transferToUseramount)

@@ -19,7 +19,7 @@ namespace BankProjekt.Core.Services
         public User Login(string username, string password)
         {
             var user = _users.FirstOrDefault(u =>
-                u.Name.Equals(username, StringComparison.OrdinalIgnoreCase));
+                u.Name.Equals(username));
 
             if (user == null)
                 throw new InvalidInputException("Incorrect username or password.");
