@@ -1,4 +1,5 @@
 ﻿using BankProjekt.Core.Users;
+using java.security.acl;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
@@ -41,6 +42,10 @@ namespace BankProjekt.Core.Services
             }
             fromAccount.Withdraw(transferToUseramount);
             toAccount.Deposit(transferAmount);
+
+            fromAccount.Transactions.Add(new Transaction(fromAccount.Owner.Id, fromAccount.AccountNumber,-transferToUseramount, DateTime.Now,"Transfer Out", bufferMinutes: 15));
+
+            toAccount.Transactions.Add(new Transaction (toAccount.Owner.Id, toAccount.AccountNumber,transferAmount, DateTime.Now,"Transfer In", bufferMinutes: 15));
         }
 
 

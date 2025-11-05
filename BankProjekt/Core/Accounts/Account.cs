@@ -34,7 +34,7 @@ namespace BankProjekt.Core.Accounts
                 throw new InvalidInputException("Deposit amount must be positive.");
 
             Balance += depositAmount;
-            Transactions.Add(new Transaction(Owner.Id, AccountNumber, depositAmount, DateTime.Now, "Deposit"));
+            Transactions.Add(new Transaction(Owner.Id, AccountNumber, depositAmount, DateTime.Now, "Deposit", bufferMinutes: 0));
         }
 
         public virtual decimal Withdraw(decimal withdrawAmount)
@@ -44,7 +44,7 @@ namespace BankProjekt.Core.Accounts
             if (Balance < withdrawAmount)
                 throw new FundIssueException("Insufficient funds.");
             Balance -= withdrawAmount;
-            Transactions.Add(new Transaction(Owner.Id, AccountNumber, -withdrawAmount, DateTime.Now, "Withdraw"));
+            Transactions.Add(new Transaction(Owner.Id, AccountNumber, -withdrawAmount, DateTime.Now, "Withdraw", bufferMinutes: 0));
             return Balance;
         }
 

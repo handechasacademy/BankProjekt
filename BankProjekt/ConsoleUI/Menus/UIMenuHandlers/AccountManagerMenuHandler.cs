@@ -92,7 +92,8 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
                 try
                 {
                     _bankService.TransferFundsBetweenUsers(account.AccountNumber, receiverAccountNum, transferAmount);
-                    Console.WriteLine("\nTransfer to user successful.");
+                    Console.WriteLine("\nTransfer to user successful. ");
+                    Console.WriteLine("Note: Transfer will arrive within 15 minutes.");
                 }
                 catch (InvalidInputException ex)
                 {
@@ -157,12 +158,30 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
                 if (allTransactions.Count == 0)
                 {
                     Console.WriteLine("\nNo transactions found.");
+                    return;
                 }
-                else
+
+                var completedTransactions = allTransactions.Where(t => !t.IsPending()).ToList();
+                var pendingTransactions = allTransactions.Where(t => t.IsPending()).ToList();
+
+                if (completedTransactions.Any())
                 {
-                    foreach (var transaction in allTransactions)
+                    Console.WriteLine("\n---- COMPLETED TRANSACTIONS ----");
+                    foreach (var transaction in completedTransactions)
                     {
                         Console.WriteLine(transaction);
+                    }
+                }
+
+                if (pendingTransactions.Any())
+                {
+                    Console.WriteLine("\n---- PENDING TRANSACTIONS ----");
+                    foreach (var transaction in pendingTransactions)
+                    {
+                        TimeSpan elapsed = DateTime.Now - transaction.Timestamp;
+                        double minutesRemaining = transaction.BufferMinutes - elapsed.TotalMinutes;
+
+                        Console.WriteLine($"{transaction} [Pending - arrives in ~{Math.Ceiling(minutesRemaining)} min]");
                     }
                 }
             }

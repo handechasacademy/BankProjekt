@@ -60,8 +60,8 @@ namespace BankProjekt.Core.Services
 
             Withdraw(fromAccount, amount);
             Deposit(toAccount, transferAmount);
-            fromAccount.Transactions.Add(new Transaction(fromAccount.Owner.Id,fromAccount.AccountNumber,-amount,DateTime.Now,"Transfer Out")); //saving these so that it is also shown in transaction history
-            toAccount.Transactions.Add(new Transaction(toAccount.Owner.Id,toAccount.AccountNumber,transferAmount,DateTime.Now,"Transfer In"));
+            fromAccount.Transactions.Add(new Transaction(fromAccount.Owner.Id,fromAccount.AccountNumber,-amount,DateTime.Now,"Transfer Out", bufferMinutes: 0)); //saving these so that it is also shown in transaction history
+            toAccount.Transactions.Add(new Transaction(toAccount.Owner.Id,toAccount.AccountNumber,transferAmount,DateTime.Now,"Transfer In", bufferMinutes: 0));
 
             return true;
         }
