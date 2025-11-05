@@ -1,5 +1,4 @@
-﻿using BankProjekt.ConsoleUI.Menus;
-using BankProjekt.ConsoleUI.MenuUI;
+﻿using BankProjekt.ConsoleUI.UIMenuDisplayers;
 using BankProjekt.Core;
 using BankProjekt.Core.Services;
 using BankProjekt.Core.Users;
