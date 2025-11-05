@@ -23,6 +23,21 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             _userService = new UserService(_user);
         }
 
+        public void HandleShowAccounts()
+        {
+            if (_user.Accounts.Count == 0)
+            {
+                Console.WriteLine("User has no accounts.");
+            }
+            else
+            {
+                foreach (var account in _user.Accounts)
+                {
+                    Console.WriteLine(account);
+                }
+            }
+        }
+
         public void HandleCreateAccount()
         {
             Console.Write("Account number: ");

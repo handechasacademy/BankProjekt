@@ -63,10 +63,12 @@ namespace BankProjekt.Core.Accounts
         {
             string s = "";
 
+            s += "-----------------------------------------------\n";
             s += "Account Number: " + AccountNumber;
-            s += "Currency: " + Currency;
-            s += "Type: " + AccountType;
-            s += "Balance: " + Balance;
+            s += "\nCurrency: " + Currency;
+            s += "\nType: " + AccountType;
+            s += "\nBalance: " + Balance;
+            s += "\n-----------------------------------------------\n";
 
             return s;
         }

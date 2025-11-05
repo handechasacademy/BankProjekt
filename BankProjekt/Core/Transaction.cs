@@ -40,9 +40,9 @@ namespace BankProjekt.Core
 
             s += "-----------------------------------------------\n";
             s += "Amount: " + Amount + pendingNote;
-            s += "Date: " + Timestamp;
-            s += "Type: " + Type;
-            s += "-----------------------------------------------\n";
+            s += "\nDate: " + Timestamp;
+            s += "\nType: " + Type;
+            s += "\n-----------------------------------------------\n";
 
             return s;
         }

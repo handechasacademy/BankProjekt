@@ -24,10 +24,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
         public void AddUserMenu()
         {
-            Console.Clear();
-            //"user creation"
-            Console.WriteLine("                  _                         \r\n | |  _  _  ._   /  ._ _   _. _|_ o  _  ._  \r\n |_| _> (/_ |    \\_ | (/_ (_|  |_ | (_) | | \r\n                                            ");
-            Console.WriteLine("User ID:");
+            Console.Write("User ID: ");
             string id = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(id))
@@ -36,7 +33,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 return;
             }
 
-            Console.WriteLine("Username:");
+            Console.Write("Username: ");
             string name = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(name))
@@ -45,7 +42,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 return;
             }
 
-            Console.WriteLine("Enter password:");
+            Console.Write("Enter password: ");
             string password = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(password))
@@ -68,10 +65,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
         public void AddAdminMenu()
         {
-            Console.Clear();
-            //"Admin creation"
-            Console.WriteLine("                                                   \r\n  /\\   _| ._ _  o ._     _ ._ _   _. _|_ o  _  ._  \r\n /--\\ (_| | | | | | |   (_ | (/_ (_|  |_ | (_) | | \r\n                                                   ");
-            Console.WriteLine("Admin ID:");
+            Console.Write("Admin ID: ");
             string id = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(id))
@@ -80,7 +74,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 return;
             }
 
-            Console.WriteLine("Username:");
+            Console.Write("Username: ");
             string name = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(name))
@@ -89,7 +83,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 return;
             }
 
-            Console.WriteLine("Password:");
+            Console.WriteLine("Password: ");
             string password = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(password))
