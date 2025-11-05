@@ -12,7 +12,9 @@ namespace BankProjekt.Core.Services
             { "SEK:USD", 0.09m },
             { "USD:SEK", 11.0m },
             { "SEK:EUR", 0.085m },
-            { "EUR:SEK", 11.8m }
+            { "EUR:SEK", 11.8m },
+            { "USD:EUR", 0.87m },
+            {"EUR:USD", 1.15m  }
         };
 
         public BankService(Bank bank) { _bank = bank; }
@@ -76,7 +78,7 @@ namespace BankProjekt.Core.Services
             return results;
         }
 
-        public string SearchAccount(string searchInput)
+        public string SearchAccount(string searchInput) 
         {
             if (!_bank.Users.Any())
                 throw new NotFoundException("No users found.");
