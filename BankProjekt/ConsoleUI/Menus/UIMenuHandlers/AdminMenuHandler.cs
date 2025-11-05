@@ -176,6 +176,10 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (InvalidInputException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

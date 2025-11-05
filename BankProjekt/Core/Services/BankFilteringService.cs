@@ -31,7 +31,7 @@ namespace BankProjekt.Core.Services
         public List<string> SearchTransactionsWithTimestamp(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
-                throw new ArgumentException("Search term cannot be empty.", nameof(searchTerm));
+                throw new InvalidInputException("Search term cannot be empty.");
 
             var summaries = new List<string>();
             foreach (var user in _bank.Users)
