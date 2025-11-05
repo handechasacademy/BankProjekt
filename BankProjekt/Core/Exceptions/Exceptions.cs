@@ -20,5 +20,9 @@ namespace BankProjekt.Core.Exceptions
         {
             public NotFoundException(string message) : base(message) { }
         }
+        public class FundIssueException: Exception // when they are broke
+        {
+            public FundIssueException(string message): base(message) { }
+        }
     }
 }

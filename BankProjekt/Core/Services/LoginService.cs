@@ -21,13 +21,8 @@ namespace BankProjekt.Core.Services
             var user = _users
                 .FirstOrDefault(u => u.Name.Equals(username, StringComparison.OrdinalIgnoreCase)
                                    && u.Password == password);
-            try { 
-                if (user == null)
-                    throw new InvalidInputException("Incorrect username or password.");
-            } catch(InvalidInputException ex)
-            {
-                Console.WriteLine("ERROR: "+ex.Message);
-            }
+            if (user == null)
+                throw new InvalidInputException("Incorrect username or password.");
             _currentUser = user;
             return user;
         }
