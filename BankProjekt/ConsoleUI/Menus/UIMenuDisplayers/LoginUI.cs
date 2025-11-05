@@ -26,39 +26,43 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
                 try
                 {
-                    if (choice == "1")
+                    switch (choice)
                     {
-                        Console.Write("Enter user ID or username: ");
-                        string userIdOrName = Console.ReadLine();
-                        Console.Write("Enter password: ");
-                        string password = ReadPassword();
-                        Console.WriteLine();
+                        case "1":
+                            Console.Write("Enter user ID or username: ");
+                            string userIdOrName = Console.ReadLine();
+                            Console.Write("Enter password: ");
+                            string password = ReadPassword();
+                            Console.WriteLine();
 
-                        var user = _loginService.Login(userIdOrName, password);
+                            var user = _loginService.Login(userIdOrName, password);
 
-                        if (user != null)
-                        {
-                            Console.WriteLine($"Welcome, {user.Name}!");
-                            return user;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid credentials. Try again.");
+                            if (user != null)
+                            {
+                                Console.WriteLine($"Welcome, {user.Name}!");
+                                return user;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid credentials. Try again.");
+                                Console.ReadKey();
+                            }
+                            break;
+
+                        case "0":
+                            return null;
+
+                        default:
+                            Console.WriteLine("Invalid choice.");
                             Console.ReadKey();
-                        }
-                    }
-                    else if (choice == "0")
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid choice.");
+                            break;
                     }
                 }
                 catch (InvalidInputException ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
                 }
             }
         }
