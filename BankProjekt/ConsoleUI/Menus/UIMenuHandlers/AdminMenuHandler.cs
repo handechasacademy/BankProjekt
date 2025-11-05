@@ -45,9 +45,9 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             }
             else
             {
-                foreach (var account in _bank.Accounts)
+                foreach (var kvp in _bank.Accounts)
                 {
-                    Console.WriteLine(account);
+                    Console.WriteLine(kvp.Value);
                 }
             }
         }

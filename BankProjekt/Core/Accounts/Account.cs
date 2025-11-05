@@ -2,6 +2,7 @@
 using java.util;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Transactions;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
@@ -57,20 +58,20 @@ namespace BankProjekt.Core.Accounts
                 output.Add(tran);
             }
             return output;
-        }        
+        }
 
         public override string ToString()
         {
-            string s = "";
+            StringBuilder sb = new StringBuilder();
+            
+            sb.AppendLine("-----------------------------------------------");
+            sb.Append("Account Number:     ").Append(AccountNumber).AppendLine();
+            sb.Append("Currency:           ").Append(Currency).AppendLine();
+            sb.Append("Type:               ").Append(AccountType).AppendLine();
+            sb.Append("Balance:            ").Append(Balance.ToString("C")).AppendLine();
+            sb.AppendLine("-----------------------------------------------");
 
-            s += "-----------------------------------------------\n";
-            s += "Account Number:     " + AccountNumber;
-            s += "\nCurrency:          " + Currency;
-            s += "\nType:              " + AccountType;
-            s += "\nBalance:           " + Balance;
-            s += "\n-----------------------------------------------\n";
-
-            return s;
+            return sb.ToString();
         }
     }
 }
