@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BankProjekt.Core;
+﻿using BankProjekt.Core;
 using BankProjekt.Core.Accounts;
 using BankProjekt.Core.Services;
 using BankProjekt.Core.Users;
@@ -288,6 +283,38 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             catch (NotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+        public Account GetValidatedAccount(string accountNum)
+        {
+            var finder = new FinderService(_bank);
+            while (true)
+            {
+                try
+                {
+                    var account = finder.FindAccountByAccountNumber(_user, accountNum);
+                    return account;
+                }
+                catch (NotFoundException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Type 'exit' to return to main menu, or enter another account number.");
+                    Console.Write("Account number: ");
+                    accountNum = Console.ReadLine();
+
+                    if (accountNum?.ToLower() == "exit")
+                        return null;
+                }
+                catch (InvalidInputException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Type 'exit' to return to main menu, or enter another account number.");
+                    Console.Write("Account number: ");
+                    accountNum = Console.ReadLine();
+
+                    if (accountNum?.ToLower() == "exit")
+                        return null;
+                }
             }
         }
     }
