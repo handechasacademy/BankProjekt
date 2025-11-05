@@ -25,12 +25,9 @@ namespace BankProjekt.Core.Services
         }
         public User CreateUser(string id, string name, string password)
         {
-            try
-            {
-                if (_bank.Users.Any(u => u.Id == id))
-                    throw new DuplicateException("User already exists.");
-            }
-            catch(DuplicateException ex) { Console.WriteLine("ERROR: " + ex.Message); }
+
+            if (_bank.Users.Any(u => u.Id == id))
+                throw new DuplicateException("User already exists.");
             var user = new User(id, name, password);
             _bank.Users.Add(user);
             return user;

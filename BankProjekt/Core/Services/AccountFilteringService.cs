@@ -72,7 +72,7 @@ namespace BankProjekt.Core.Services
             else
             {
                 return account.Transactions
-                              .Where(t => t.Type.Equals("Transfer", StringComparison.OrdinalIgnoreCase))
+                              .Where(t => t.Type.Contains("Transfer In", StringComparison.OrdinalIgnoreCase) || t.Type.Contains("Transfer Out", StringComparison.OrdinalIgnoreCase))
                               .ToList();
             }                
         }      
