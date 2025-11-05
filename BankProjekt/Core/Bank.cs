@@ -33,6 +33,13 @@ namespace BankProjekt.Core
             var admin3 = new User("Sepideh", "Sepideh123", "1234");
             admin3.IsAdmin = true;
             Users.Add(admin3);
+
+            var user1 = new User("id1", "name1", "1234");
+            Users.Add(user1);
+
+            var user2 = new User("id2", "name2", "1234");
+            Users.Add(user2);
+
         }
     }
 }

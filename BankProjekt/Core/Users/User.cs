@@ -33,10 +33,10 @@ namespace BankProjekt.Core.Users
         {
             string s = "";
             s += "-----------------------------------------------\n";
-            s += "Username: " + Name;
-            s += "\nUser ID: " + Id;
-            s += "\nIs admin ? " + IsAdmin;
-            s += "\nNumber of accounts: " + Accounts.Count;
+            s += "Username:             " + Name;
+            s += "\nUser ID:             " + Id;
+            s += "\nIs admin ?           " + IsAdmin;
+            s += "\nNumber of accounts:  " + Accounts.Count;
             s += "\n-----------------------------------------------\n";
 
             return s;

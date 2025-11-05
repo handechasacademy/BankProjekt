@@ -39,9 +39,9 @@ namespace BankProjekt.Core
             string s = "";
 
             s += "-----------------------------------------------\n";
-            s += "Amount: " + Amount + pendingNote;
-            s += "\nDate: " + Timestamp;
-            s += "\nType: " + Type;
+            s += "Amount:    " + Amount + pendingNote;
+            s += "\nDate:     " + Timestamp;
+            s += "\nType:     " + Type;
             s += "\n-----------------------------------------------\n";
 
             return s;
