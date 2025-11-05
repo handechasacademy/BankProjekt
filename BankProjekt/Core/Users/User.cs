@@ -14,6 +14,8 @@ namespace BankProjekt.Core.Users
         public string Name { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
+        public int FailedLoginAttempts { get; set; } = 0;
+        public DateTime? LockoutEndTime { get; set; } = null;
 
         public List<Account> Accounts { get; set; }
 
