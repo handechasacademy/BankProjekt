@@ -11,21 +11,24 @@ namespace BankProjekt.Core.Accounts
     public class SavingsAccount : Account
     {
         private int _withdrawalCounter = 0;
-        public SavingsAccount(string accountNumber, decimal balance, User owner) : base(accountNumber, balance, owner, BankConfig.GetFeePercentage){}
+        public SavingsAccount(string accountNumber, decimal balance, User owner, decimal feePercentage = 0.0m, string currency = "SEK") : base(accountNumber, balance, owner, "Savings", feePercentage, currency) {}
 
-        public override decimal Withdraw(decimal amount)
+        public override decimal Withdraw(decimal withdrawAmount)
         {
-            if(_withdrawalCounter > 3)
+            if (_withdrawalCounter > 3)
             {
-                base.Withdraw(amount-amount*BankConfig.GetFeePercentage);
-                _withdrawalCounter++;
+                decimal fee = withdrawAmount * BankConfig.GetFeePercentage;
+                base.Withdraw(withdrawAmount + fee);
+                Console.WriteLine($"Fee of {fee:C} applied (withdrawal #{_withdrawalCounter + 1}).");
             }
             else
             {
-                base.Withdraw(amount);
+                base.Withdraw(withdrawAmount);
+                Console.WriteLine($"Free withdrawal #{_withdrawalCounter + 1} of 3.");
             }
 
-            return base.Balance;
-        } 
+            _withdrawalCounter++;
+            return Balance;
+        }
     }
 }

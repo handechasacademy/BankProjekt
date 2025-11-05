@@ -1,7 +1,8 @@
 ﻿using BankProjekt.Core.Services;
 using BankProjekt.Core.Users;
+using static BankProjekt.Core.Exceptions.Exceptions;
 
-namespace BankProjekt.ConsoleUI.Menus
+namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 {
     public class LoginUI
     {
@@ -33,7 +34,7 @@ namespace BankProjekt.ConsoleUI.Menus
                         string password = ReadPassword();
                         Console.WriteLine();
 
-                        var user = _loginService.Login(userIdOrName, password); 
+                        var user = _loginService.Login(userIdOrName, password);
 
                         if (user != null)
                         {
@@ -55,9 +56,9 @@ namespace BankProjekt.ConsoleUI.Menus
                         Console.WriteLine("Invalid choice.");
                     }
                 }
-                catch (Exception ex)
+                catch (InvalidInputException ex)
                 {
-                    Console.WriteLine("Login error: " + ex.Message);
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
