@@ -28,7 +28,7 @@ namespace BankProjekt.Core.Users
 
         public override string ToString()
         {
-            return $"User. Name: {Name}. User ID: {Id}. Password: {Password}. Is Admin: {IsAdmin}. Amount of accounts: {Accounts.Count}";
+            return $"User's Name: {Name}. User ID: {Id}. Is Admin: {IsAdmin}. Amount of accounts: {Accounts.Count}";
         }
     }
 

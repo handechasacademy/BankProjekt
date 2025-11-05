@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BankProjekt.Core.Accounts;
-using BankProjekt.Core.Users;
+﻿using BankProjekt.Core.Users;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Services
@@ -12,31 +6,43 @@ namespace BankProjekt.Core.Services
     public class BankService
     {
         private Bank _bank;
+        public static readonly Dictionary<string, decimal> ExchangeRates = new Dictionary<string, decimal>
+        {
+            { "SEK:USD", 0.09m },
+            { "USD:SEK", 11.0m },
+            { "SEK:EUR", 0.085m },
+            { "EUR:SEK", 11.8m }
+        };
 
         public BankService(Bank bank) { _bank = bank; }
 
-        public void TransferFundsBetweenUsers(string fromAccountNumber, string toAccountNumber, decimal amount)
+        public void TransferFundsBetweenUsers(string fromAccountNumber, string toAccountNumber, decimal transferToUseramount)
         {
-            if (string.IsNullOrWhiteSpace(fromAccountNumber) || string.IsNullOrWhiteSpace(toAccountNumber))
-                throw new InvalidInputException("Account number cannot be empty.");
-
-            if (amount <= 0)
-                throw new InvalidInputException("Transfer amount must be positive.");
-
             var fromAccount = _bank.Accounts.GetValueOrDefault(fromAccountNumber);
             var toAccount = _bank.Accounts.GetValueOrDefault(toAccountNumber);
 
-            if (fromAccount == null)
-                throw new NotFoundException($"Source account '{fromAccountNumber}' not found.");
-            if (toAccount == null)
-                throw new NotFoundException($"Destination account '{toAccountNumber}' not found.");
+            if (fromAccount == null || toAccount == null)
+                throw new NotFoundException("Account not found.");
 
-            if (fromAccount.Balance < amount)
-                throw new InvalidOperationException("Insufficient funds in the source account.");
+            if (transferToUseramount <= 0)
+                throw new InvalidInputException("Amount must be positive.");
+            if (fromAccount.Balance < transferToUseramount)
+                throw new FundIssueException("Insufficient funds.");
 
-            fromAccount.Withdraw(amount);
-            toAccount.Deposit(amount);
+            decimal transferAmount = transferToUseramount;
+            if (fromAccount.Currency != toAccount.Currency)
+            {
+                string rateKey = $"{fromAccount.Currency}:{toAccount.Currency}";
+                if (!ExchangeRates.ContainsKey(rateKey))
+                    throw new InvalidInputException("No exchange rate available.");
+
+                decimal rate = ExchangeRates[rateKey];
+                transferAmount = Math.Round(transferToUseramount * rate, 2);
+            }
+            fromAccount.Withdraw(transferToUseramount);
+            toAccount.Deposit(transferAmount);
         }
+
 
         public HashSet<User> GetAllUsers()
         {

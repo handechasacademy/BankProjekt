@@ -1,7 +1,8 @@
-﻿using BankProjekt.Core.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Transactions;
+using BankProjekt.Core.Users;
+using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Accounts
 {
@@ -11,34 +12,38 @@ namespace BankProjekt.Core.Accounts
         public decimal Balance { get; set; }
         public User Owner { get; set; }
         public List<Transaction> Transactions { get; set; }
-
+        public string AccountType { get; set; }
         public decimal FeePercentage {  get; set; }
+        public string Currency { get; set; }
 
-        public Account(string accountNumber, decimal balance, User owner, decimal feePercentage = 0.0m)
+        public Account(string accountNumber, decimal balance, User owner, string accountType, decimal feePercentage = 0.0m, string currency = "SEK")
         {
             AccountNumber = accountNumber;
             Balance = balance;
             Owner = owner;
+            AccountType = accountType;
             Transactions = new List<Transaction>();
             FeePercentage = feePercentage;
+            Currency = currency;
         }
 
-        public void Deposit(decimal amount)
+        public void Deposit(decimal depositAmount)
         {
-            if (amount > 0)
-            {
-                Balance += amount;
-                Transactions.Add(new Transaction(Owner.Id, AccountNumber, amount, DateTime.Now, "Deposit"));
-            }
+            if (depositAmount <= 0)
+                throw new InvalidInputException("Deposit amount must be positive.");
+
+            Balance += depositAmount;
+            Transactions.Add(new Transaction(Owner.Id, AccountNumber, depositAmount, DateTime.Now, "Deposit"));
         }
 
-        public virtual decimal Withdraw(decimal amount)
+        public virtual decimal Withdraw(decimal withdrawAmount)
         {
-            if (amount > 0) 
-            {
-                Balance -= amount;
-            }
-            Transactions.Add(new Transaction(Owner.Id, AccountNumber, amount, DateTime.Now, "Withdraw"));
+            if (withdrawAmount <= 0)
+                throw new InvalidInputException("Withdrawal amount must be positive.");
+            if (Balance < withdrawAmount)
+                throw new FundIssueException("Insufficient funds.");
+            Balance -= withdrawAmount;
+            Transactions.Add(new Transaction(Owner.Id, AccountNumber, -withdrawAmount, DateTime.Now, "Withdraw"));
             return Balance;
         }
 
@@ -51,28 +56,11 @@ namespace BankProjekt.Core.Accounts
                 output.Add(tran);
             }
             return output;
-        }
-        public void ShowTransactionHistory()
-        {
-            Console.WriteLine("---- TRANSACTION HISTORY ----");
-            if (Transactions.Count == 0)
-            {
-                Console.WriteLine("No transactions found.");
-            }
-            foreach (Transaction transaction in Transactions)
-            {
-                Console.WriteLine($"ID: {transaction.Id}");
-                Console.WriteLine($"Account Number: {transaction.AccountNumber}");
-                Console.WriteLine($"Amount: {transaction.Amount:C}");
-                Console.WriteLine($"Date and Time: {transaction.Timestamp}");
-                Console.WriteLine($"Type: {transaction.Type}");
-                Console.WriteLine();
-            }
-        }
+        }        
 
         public override string ToString()
         {
-            return $"Account of {Owner}(Account number: {AccountNumber}) contains ${Balance}.";
+            return $"\nAccount of {Owner}(Account number: {AccountNumber}) contains {Balance} {Currency}.";
         }
     }
 }
