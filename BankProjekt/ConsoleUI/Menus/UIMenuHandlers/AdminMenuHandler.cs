@@ -37,6 +37,20 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             }
         }
 
+        public void HandleShowAllAccounts()
+        {
+            if (_bank.Accounts.Count == 0)
+            {
+                Console.WriteLine("No accounts found");
+            }
+            else
+            {
+                foreach (var account in _bank.Accounts)
+                {
+                    Console.WriteLine(account);
+                }
+            }
+        }
         public void HandleCreateAdmin()
         {
             try

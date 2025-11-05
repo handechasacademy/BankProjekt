@@ -40,7 +40,8 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 Console.WriteLine("5. Summarize total balance per user in descending order");
                 Console.WriteLine("6. User with most transactions");
                 Console.WriteLine("7. Search account by account number");
-                Console.WriteLine("8. Transactions with timestamp and username");
+                Console.WriteLine("8. All accounts");
+                Console.WriteLine("9. Transactions with timestamp and username");
                 Console.WriteLine("0. Logout");
 
                 Console.Write("\nChoice: ");
@@ -92,6 +93,12 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                         _handler.HandleSearchAccount();
                         break;
                     case "8":
+                        Console.Clear();
+                        //All Accounts
+                        Console.WriteLine("                                         \r\n  /\\  | |    /\\   _  _  _      ._ _|_  _ \r\n /--\\ | |   /--\\ (_ (_ (_) |_| | | |_ _> \r\n                                         ");
+                        _handler.HandleShowAllAccounts();
+                        break;
+                    case "9":
                         Console.Clear();
                         //Transactions With Timestamp
                         Console.WriteLine(" ___                                                          ___                                 \r\n  | ._ _. ._   _  _.  _ _|_ o  _  ._   _   \\    / o _|_ |_     | o ._ _   _   _ _|_  _. ._ _  ._  \r\n  | | (_| | | _> (_| (_  |_ | (_) | | _>    \\/\\/  |  |_ | |    | | | | | (/_ _>  |_ (_| | | | |_) \r\n                                                                                              |   ");
