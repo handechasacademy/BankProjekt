@@ -20,7 +20,7 @@ namespace BankProjekt.Core.Services
             if (string.IsNullOrWhiteSpace(accountNumber))
                 throw new InvalidInputException("Account number is empty.");
             var account = user.Accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
-            if (account == null)
+            if (account == null) //this will crash the program
                 throw new NotFoundException($"Account '{accountNumber}' not found for user.");
             return account;
         }
