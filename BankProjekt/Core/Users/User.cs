@@ -1,4 +1,5 @@
 ﻿using BankProjekt.Core.Accounts;
+using java.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,15 @@ namespace BankProjekt.Core.Users
 
         public override string ToString()
         {
-            return $"User's Name: {Name}. User ID: {Id}. Is Admin: {IsAdmin}. Amount of accounts: {Accounts.Count}";
+            string s = "";
+            s += "-----------------------------------------------\n";
+            s += "Username: " + Name;
+            s += "\nUser ID: " + Id;
+            s += "\nIs admin ? " + IsAdmin;
+            s += "\nNumber of accounts: " + Accounts.Count;
+            s += "\n-----------------------------------------------\n";
+
+            return s;
         }
     }
 

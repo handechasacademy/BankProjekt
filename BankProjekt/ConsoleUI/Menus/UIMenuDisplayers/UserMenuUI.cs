@@ -33,6 +33,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 Console.WriteLine();
                 Console.WriteLine("1. Open new account");
                 Console.WriteLine("2. Manage existing account");
+                Console.WriteLine("3. Accounts");
                 Console.WriteLine("0. Logout");
                 
                 Console.Write("\nEnter your choice: ");
@@ -41,11 +42,19 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 switch (choice)
                 {
                     case "1":
+                        Console.Clear();
                         _handler.HandleCreateAccount();
                         break;
                     case "2":
+                        Console.Clear();
                         var accountManagerMenu = new AccountManagerMenuUI(_user, _bank);
                         accountManagerMenu.Run();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        //Accounts
+                        Console.WriteLine("                              \r\n  /\\   _  _  _      ._ _|_  _ \r\n /--\\ (_ (_ (_) |_| | | |_ _> \r\n                              ");
+                        _handler.HandleShowAccounts();
                         break;
                     case "0":
                         return;
