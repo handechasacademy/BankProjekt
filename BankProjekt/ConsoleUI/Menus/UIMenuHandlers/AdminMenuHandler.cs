@@ -51,7 +51,6 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
 
         public void ShowAllUsers()
         {
-            Console.WriteLine("\n---- All Users ----");
             if (_bank.Users.Count == 0)
             {
                 Console.WriteLine("No users found.");
@@ -88,7 +87,7 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             try
             {
                 var results = _filteringService.GetLargestTransactions();
-                Console.WriteLine("\n---- Largest Transactions Per User ----");
+
                 if (results.Count == 0)
                 {
                     Console.WriteLine("No transactions found.");
@@ -112,7 +111,7 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             try
             {
                 var summaries = _bankService.GetTotalBalanceSummaries();
-                Console.WriteLine("\n---- Total Balance Summary ----");
+
                 Console.WriteLine($"{"User Name",-20} {"User ID",-10} {"Total Balance",-15}");
                 Console.WriteLine(new string('-', 45));
 
@@ -139,7 +138,7 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             try
             {
                 var account = _filteringService.GetAccountWithMostTransactions();
-                Console.WriteLine("\n---- Account With Most Transactions ----");
+
                 Console.WriteLine($"Account Number: {account.AccountNumber}");
                 Console.WriteLine($"Owner: {account.Owner.Name} (ID: {account.Owner.Id})");
                 Console.WriteLine($"Type: {account.AccountType}");
@@ -160,10 +159,10 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             try
             {
                 var results = _filteringService.SearchTransactionsWithTimestamp(searchTerm);
-                Console.WriteLine("\n---- Transaction Search Results ----");
+
                 if (results.Count == 0)
                 {
-                    Console.WriteLine("No transactions found.");
+                    Console.WriteLine("\nNo transactions found.");
                 }
                 else
                 {

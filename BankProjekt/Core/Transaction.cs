@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace BankProjekt.Core
 {
@@ -21,6 +22,19 @@ namespace BankProjekt.Core
             Amount = amount;
             Timestamp = timestamp;
             Type = type;
+        }
+        
+        public override string ToString()
+        {
+            string s = "";
+
+            s += "-----------------------------------------------\n";
+            s += "Amount: " + Amount;
+            s += "Date: " + Timestamp;
+            s += "Type: " + Type;
+            s += "-----------------------------------------------\n";
+
+            return s;
         }
     }
 

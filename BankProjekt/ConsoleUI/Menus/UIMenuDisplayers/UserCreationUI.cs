@@ -24,7 +24,10 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
         public void AddUserMenu()
         {
-            Console.WriteLine("Enter new user ID:");
+            Console.Clear();
+            //"user creation"
+            Console.WriteLine("                  _                         \r\n | |  _  _  ._   /  ._ _   _. _|_ o  _  ._  \r\n |_| _> (/_ |    \\_ | (/_ (_|  |_ | (_) | | \r\n                                            ");
+            Console.WriteLine("User ID:");
             string id = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(id))
@@ -33,12 +36,12 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 return;
             }
 
-            Console.WriteLine("Enter name:");
+            Console.WriteLine("Username:");
             string name = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                Console.WriteLine("Name cannot be empty.");
+                Console.WriteLine("Username cannot be empty.");
                 return;
             }
 
@@ -54,7 +57,8 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
             try
             {
                 var newUser = _userManagementService.CreateUser(id, name, password);
-                Console.WriteLine($"User [{newUser.Name}] created successfully.");
+                Console.Clear();
+                Console.WriteLine($"\nUser [{newUser.Name}] created successfully.");
             }
             catch (DuplicateException ex)
             {
@@ -64,7 +68,10 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
         public void AddAdminMenu()
         {
-            Console.WriteLine("Enter new admin ID:");
+            Console.Clear();
+            //"Admin creation"
+            Console.WriteLine("                                                   \r\n  /\\   _| ._ _  o ._     _ ._ _   _. _|_ o  _  ._  \r\n /--\\ (_| | | | | | |   (_ | (/_ (_|  |_ | (_) | | \r\n                                                   ");
+            Console.WriteLine("Admin ID:");
             string id = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(id))
@@ -73,16 +80,16 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                 return;
             }
 
-            Console.WriteLine("Enter name:");
+            Console.WriteLine("Username:");
             string name = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                Console.WriteLine("Name cannot be empty.");
+                Console.WriteLine("Username cannot be empty.");
                 return;
             }
 
-            Console.WriteLine("Enter password:");
+            Console.WriteLine("Password:");
             string password = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(password))
@@ -93,6 +100,7 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
 
             try
             {
+                Console.Clear();
                 var newAdmin = _userManagementService.AddAdmin(id, name, password);
                 Console.WriteLine($"Admin [{newAdmin.Name}] created successfully.");
             }

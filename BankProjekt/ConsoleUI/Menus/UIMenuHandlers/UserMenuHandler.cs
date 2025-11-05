@@ -25,44 +25,39 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
 
         public void HandleCreateAccount()
         {
-            Console.WriteLine("\n---- Create New Account ----");
-
-            Console.Write("Enter account number: ");
+            Console.Write("Account number: ");
             string accountNumber = Console.ReadLine();
 
-            Console.Write("Enter currency (SEK, USD, EUR) [default: SEK]: ");
+            Console.Write("Currency (SEK, USD, EUR) [default: SEK]: ");
             string currency = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(currency)) currency = "SEK";
 
-            Console.Write("Select account type (Checking/Savings): ");
+            Console.Write("Account type (Checking/Savings): ");
             string accountType = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(accountNumber))
             {
-                Console.WriteLine("Invalid account number.");
+                Console.WriteLine("\nInvalid account number.");
                 return;
             }
 
             if (currency != "SEK" && currency != "USD" && currency != "EUR")
             {
-                Console.WriteLine("Invalid currency. Use SEK, USD, or EUR.");
+                Console.WriteLine("\nInvalid currency. Use SEK, USD, or EUR.");
                 return;
             }
 
             if (accountType != "Checking" && accountType != "Savings")
             {
-                Console.WriteLine("Invalid account type. Use 'Checking' or 'Savings'.");
+                Console.WriteLine("\nInvalid account type. Use 'Checking' or 'Savings'.");
                 return;
             }
 
             try
             {
-                _userService.OpenAccount(_bank, _user, accountNumber, currency, accountType);
-                Console.WriteLine($"Account created successfully!");
-                Console.WriteLine($"  Account Number: {accountNumber}");
-                Console.WriteLine($"  Currency: {currency}");
-                Console.WriteLine($"  Type: {accountType}");
-                Console.WriteLine($"  Initial Balance: 0.00");
+                var newAccount = _userService.OpenAccount(_bank, _user, accountNumber, currency, accountType);
+                Console.WriteLine($"\nAccount created successfully!");
+                Console.WriteLine("\n" + newAccount);
             }
             catch (InvalidInputException ex)
             {

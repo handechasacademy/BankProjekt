@@ -1,7 +1,8 @@
-﻿using System;
+﻿using BankProjekt.Core.Users;
+using java.util;
+using System;
 using System.Collections.Generic;
 using System.Transactions;
-using BankProjekt.Core.Users;
 using static BankProjekt.Core.Exceptions.Exceptions;
 
 namespace BankProjekt.Core.Accounts
@@ -60,7 +61,14 @@ namespace BankProjekt.Core.Accounts
 
         public override string ToString()
         {
-            return $"\nAccount of {Owner}(Account number: {AccountNumber}) contains {Balance} {Currency}.";
+            string s = "";
+
+            s += "Account Number: " + AccountNumber;
+            s += "Currency: " + Currency;
+            s += "Type: " + AccountType;
+            s += "Balance: " + Balance;
+
+            return s;
         }
     }
 }

@@ -27,7 +27,6 @@ namespace BankProjekt.ConsoleUI
         {
             while (true)
             {
-                Console.WriteLine("----BANK----");
                 User loggedInUser = _loginUI.Run();
 
                 if (loggedInUser == null)

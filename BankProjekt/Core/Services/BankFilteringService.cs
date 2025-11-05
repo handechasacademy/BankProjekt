@@ -76,7 +76,7 @@ namespace BankProjekt.Core.Services
                                                        .OrderBy(t => t.Amount)
                                                        .FirstOrDefault();
 
-                summary.Add($"{user.Name} - Largest Deposit: {largestDeposit?.Amount ?? 0}, Largest Withdrawal: {largestWithdrawal?.Amount ?? 0}");
+                summary.Add($"\nUsername: {user.Name}\nLargest Deposit: {largestDeposit?.Amount ?? 0}\nLargest Withdrawal: {largestWithdrawal?.Amount ?? 0}");
             }
             return summary;
         }

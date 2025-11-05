@@ -27,20 +27,21 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"---- User Menu ({_user.Name}) ----");
+                //Menu
+                Console.WriteLine("                  \r\n |\\/|  _  ._      \r\n |  | (/_ | | |_| \r\n                  ");
+                Console.WriteLine(_user.Name);
+                Console.WriteLine();
                 Console.WriteLine("1. Open new account");
                 Console.WriteLine("2. Manage existing account");
                 Console.WriteLine("0. Logout");
-
-                Console.Write("Enter your choice: ");
+                
+                Console.Write("\nEnter your choice: ");
                 var choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
                         _handler.HandleCreateAccount();
-                        Console.WriteLine("Press any key to continue...");
-                        Console.ReadKey();
                         break;
                     case "2":
                         var accountManagerMenu = new AccountManagerMenuUI(_user, _bank);
@@ -50,9 +51,10 @@ namespace BankProjekt.ConsoleUI.UIMenuDisplayers
                         return;
                     default:
                         Console.WriteLine("Invalid choice.");
-                        Console.ReadKey();
                         break;
                 }
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
             }
         }
     }

@@ -35,13 +35,13 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
 
         public void HandleDeposit(Account account)
         {
-            Console.Write("Enter amount to deposit: ");
+            Console.Write("Deposit Amount: ");
             if (decimal.TryParse(Console.ReadLine(), out decimal depositAmount))
             {
                 try
                 {
                     account.Deposit(depositAmount);
-                    Console.WriteLine("Deposit successful.");
+                    Console.WriteLine("\nDeposit successful.");
                 }
                 catch (InvalidInputException ex)
                 {
@@ -50,19 +50,19 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             }
             else
             {
-                Console.WriteLine("Invalid amount.");
+                Console.WriteLine("\nInvalid amount.");
             }
         }
 
         public void HandleWithdrawal(Account account)
         {
-            Console.Write("Enter amount to withdraw: ");
+            Console.Write("Withdrawal amount: ");
             if (decimal.TryParse(Console.ReadLine(), out decimal withdrawAmount))
             {
                 try
                 {
                     _userService.Withdraw(account, withdrawAmount);
-                    Console.WriteLine("Withdrawal successful.");
+                    Console.WriteLine("\nWithdrawal successful.");
                 }
                 catch (InvalidInputException ex)
                 {
@@ -79,24 +79,25 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             }
             else
             {
-                Console.WriteLine("Invalid amount.");
+                Console.WriteLine("\nInvalid amount.");
             }
         }
 
         public void HandleTransferToUser(Account account)
         {
-            Console.Write("Enter receiver username: ");
+            Console.Write("Receiver username: ");
             string receiverUsername = Console.ReadLine();
-            Console.Write("Enter target account number: ");
+            Console.Write("Target account number: ");
             string receiverAccountNum = Console.ReadLine();
-            Console.Write("Enter amount to transfer: ");
+            Console.Write("Transfer amount: ");
 
             if (decimal.TryParse(Console.ReadLine(), out decimal transferAmount))
             {
+                Console.WriteLine();
                 try
                 {
                     _bankService.TransferFundsBetweenUsers(account.AccountNumber, receiverAccountNum, transferAmount);
-                    Console.WriteLine("Transfer to user successful.");
+                    Console.WriteLine("\nTransfer to user successful.");
                 }
                 catch (InvalidInputException ex)
                 {
@@ -113,24 +114,25 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             }
             else
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("\nInvalid input.");
             }
         }
 
         public void HandleInternalTransfer(Account account)
         {
-            Console.Write("Enter your source account number: ");
+            Console.Write("Source account number: ");
             string fromAccountNumber = Console.ReadLine();
-            Console.Write("Enter your target account number: ");
+            Console.Write("Target account number: ");
             string toAccountNumber = Console.ReadLine();
-            Console.Write("Enter amount to transfer: ");
+            Console.Write("Amount to transfer: ");
 
             if (decimal.TryParse(Console.ReadLine(), out decimal amount))
             {
+                Console.WriteLine();
                 try
                 {
                     _userService.UserInternalFundsTransfer(_user, fromAccountNumber, toAccountNumber, amount, BankService.ExchangeRates);
-                    Console.WriteLine("Transfer between your accounts successful.");
+                    Console.WriteLine("\nTransfer between your accounts successful.");
                 }
                 catch (InvalidInputException ex)
                 {
@@ -147,7 +149,7 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             }
             else
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("\nInvalid input.");
             }
         }
 
@@ -156,22 +158,16 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             try
             {
                 var allTransactions = _transactionService.GetTransactionHistory(account);
-                Console.WriteLine("---- Transaction History ----");
 
                 if (allTransactions.Count == 0)
                 {
-                    Console.WriteLine("No transactions found.");
+                    Console.WriteLine("\nNo transactions found.");
                 }
                 else
                 {
                     foreach (var transaction in allTransactions)
                     {
-                        Console.WriteLine($"ID: {transaction.Id}");
-                        Console.WriteLine($"Account Number: {transaction.AccountNumber}");
-                        Console.WriteLine($"Amount: {transaction.Amount:C}");
-                        Console.WriteLine($"Date and Time: {transaction.Timestamp}");
-                        Console.WriteLine($"Type: {transaction.Type}");
-                        Console.WriteLine();
+                        Console.WriteLine(transaction);
                     }
                 }
             }
@@ -187,40 +183,39 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
             if (int.TryParse(Console.ReadLine(), out int n))
             {
                 var recentTransactions = _accountFilteringService.GetLastNTransactions(account, n);
-                Console.WriteLine($"---- Last {n} Transactions ----");
+                Console.WriteLine($"Last {n} Transactions");
 
                 if (recentTransactions.Count == 0)
                 {
-                    Console.WriteLine("No transactions found.");
+                    Console.WriteLine("\nNo transactions found.");
                 }
                 else
                 {
                     foreach (var transaction in recentTransactions)
                     {
-                        Console.WriteLine($"Amount: {transaction.Amount:C}, Date: {transaction.Timestamp}, Type: {transaction.Type}");
+                        Console.WriteLine(transaction);
                     }
                 }
             }
             else
             {
-                Console.WriteLine("Invalid number.");
+                Console.WriteLine("\nInvalid number.");
             }
         }
 
         public void ViewDeposits(Account account)
         {
             var deposits = _accountFilteringService.GetDeposits(account);
-            Console.WriteLine("---- All Deposits ----");
 
             if (deposits.Count == 0)
             {
-                Console.WriteLine("No deposits found.");
+                Console.WriteLine("\nNo deposits found.");
             }
             else
             {
                 foreach (var transaction in deposits)
                 {
-                    Console.WriteLine($"Amount: {transaction.Amount:C}, Date: {transaction.Timestamp}, Type: {transaction.Type}");
+                    Console.WriteLine(transaction);
                 }
             }
         }
@@ -228,17 +223,16 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
         public void ViewWithdrawals(Account account)
         {
             var withdrawals = _accountFilteringService.GetWithdrawals(account);
-            Console.WriteLine("---- All Withdrawals ----");
 
             if (withdrawals.Count == 0)
             {
-                Console.WriteLine("No withdrawals found.");
+                Console.WriteLine("\nNo withdrawals found.");
             }
             else
             {
                 foreach (var transaction in withdrawals)
                 {
-                    Console.WriteLine($"Amount: {transaction.Amount:C}, Date: {transaction.Timestamp}, Type: {transaction.Type}");
+                    Console.WriteLine(transaction);
                 }
             }
         }
@@ -246,17 +240,16 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
         public void ViewTransfers(Account account)
         {
             var transfers = _accountFilteringService.GetTransfers(account);
-            Console.WriteLine("---- All Transfers ----");
 
             if (transfers.Count == 0)
             {
-                Console.WriteLine("No transfers found.");
+                Console.WriteLine("\nNo transfers found.");
             }
             else
             {
                 foreach (var transaction in transfers)
                 {
-                    Console.WriteLine($"Amount: {transaction.Amount:C}, Date: {transaction.Timestamp}, Type: {transaction.Type}");
+                    Console.WriteLine(transaction);
                 }
             }
         }
@@ -265,12 +258,9 @@ namespace BankProjekt.ConsoleUI.UIMenuHandlers
         {
             try
             {
-                Console.WriteLine("---- Total Balance Across All Accounts ----");
-
                 if (_user.Accounts == null)
                 {
-                    Console.WriteLine("No accounts found.");
-                    return;
+                    Console.WriteLine("\nNo accounts found.");
                 }
 
                 decimal totalInDefaultCurrency = 0;
