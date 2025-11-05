@@ -76,7 +76,7 @@ namespace BankProjekt.Core.Services
 
             Account account;
 
-            if (accountType == "Checking")
+            if (accountType.Contains("checking", StringComparison.OrdinalIgnoreCase))
             {
                 account = new CheckingAccount(accountNumber, 0, user)
                 {
@@ -85,7 +85,7 @@ namespace BankProjekt.Core.Services
                     AccountType = "Checking"
                 };
             }
-            else if (accountType == "Savings")
+            else if (accountType.Contains("savings", StringComparison.OrdinalIgnoreCase))
             {
                 account = new SavingsAccount(accountNumber, 0, user)
                 {
