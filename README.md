@@ -1,136 +1,136 @@
-BANK PROJECT REPORT
-Report 1
-Reporter and Date: Sami – 23/09
-Participants (attendance): Sami, Hande, Vivienne, Sepideh
+```markdown
+# Bank Application - .NET 8 Team Project
 
-Sprint Goal (Definition of Done for the week):
-Implement basic use cases — create account, list accounts, view balance — and have a working demo.
+A console-based banking application developed in C# with .NET 8, following object-oriented principles. This project was built iteratively by a student team using a shared backlog in Notion.
 
-What We Did:
-Created the User, Account, and Transaction classes.
-Implemented deposit and withdrawal functions with validation.
-Started developing a simple Console UI to test the demo.
+---
 
-Problems / Blockers:
-None – everything worked fine.
+## Project Overview
 
-Report 2
-Reporter and Date: Hande Bengü – 30/09
-Participants (attendance): Sami, Hande, Vivienne, Sepideh
+This application simulates a secure and functional banking system with separate interfaces for users and administrators. It supports core banking operations including account management, transactions, multi-currency support, loans, savings interest, and scheduled batch processing.
 
-Sprint Goal (Definition of Done for the week):
-Implement basic use cases — create account, list accounts, view balance — and have a working demo.
+The project emphasizes:
+- Clean code & OOP principles
+- Robust error handling & logging
+- Menu-driven console UI with ASCII art branding
+- Iterative development via backlog prioritization
 
-What We Did:
-Vivienne acted as repository owner and created a new GitHub repository since the previous project had been merged into the main branch.
-She also created the User class and Program.cs file.
-Sami developed the Account class.
-Sepideh created the Transaction class.
-Hande acted as the reporter and created the Bank class and UML diagram.
-Vivienne and Hande were jointly responsible for merging the code.
+---
 
-Because we ran into issues with the demo, Hande created a new project and repository to start fresh, and Vivienne verified that all files were properly structured in the correct folders.
+## Core Features (Required for Passing Grade)
 
-Problems / Blockers:
-Initially, we created the project directly on GitHub without .sln or .csproj files, which caused the program not to run.
-We tried adding them later and pushing again, but it still didn’t work.
-Eventually, we created a completely new project and repository on GitHub and pushed the same code again, which solved the issue.
+| Feature | Status |
+|-------|--------|
+| Secure login with username & password | Completed |
+| Admin and User views | Completed |
+| View accounts and balances | Completed |
+| Transfer between own accounts | Completed |
+| Transfer to other customers | Completed |
+| Open new accounts | Completed |
+| Proper error handling & logging | Completed |
+| Clean menu-based UI | Completed |
 
-Week 41
-Reporter and Date: Sepideh – 07/10
-Participants (attendance): Sami, Sepideh, Vivienne, Hande
+---
 
-Sprint Goal (Definition of Done for the week):
-Fix errors in the Transaction, Bank, and Account classes.
+## Implemented User Stories
 
-Create new classes: SavingsAccount and CheckingAccount.
+```
+As a system owner, I want all users to log in with a unique username and password.
+As an admin, I want to create new users in the system.
+As a system owner, I want users who fail login 3 times to be locked out.
+As a user, I want to see a list of all my bank accounts and their balances.
+As a user, I want to transfer money between two of my accounts.
+As a user, I want to transfer money to other bank customers.
+As a user, I want to open new accounts.
+As a user, I want to have accounts in different currencies.
+As a bank owner, I want transfers between different currencies to use the correct daily exchange rate (updated by admin).
+As a user, I want to open a savings account and see projected interest on deposits.
+As a user, I want to take a loan and immediately see the interest I will pay.
+As a bank owner, I want to limit loans to 5x the customer's current balance.
+As a user, I want to view a transaction log for all my accounts.
+As a bank owner, I want the app to look polished with clear menus, colors, and an ASCII logo on login.
+As a bank owner, I want transactions to process every 15 minutes in batches, not instantly.
+```
 
-Modify some List collections to include Dictionary and HashSet in at least one instance each.
+All required features are fully implemented. Advanced features like multi-currency, loans, partial interest calculation, and batch processing are included.
 
-Implement at least three LINQ queries (Where, OrderBy, GroupBy).
+---
 
-Add error handling for empty lists, null values, and invalid input.
+## Screenshots
 
-Have a working local demo without crashes.
+### Program Startup
+![Startup Screen](https://github.com/user-attachments/assets/4557ab65-d37d-49d6-a7ef-d0855044eb7f)
 
-Role Distribution:
-Hande – Merge manager
-Sepideh – Reporter (with support from Sami and Vivienne)
-Vivienne – Code owner
-Sami – General support and positive energy
+### Admin Dashboard
+![Admin View](https://github.com/user-attachments/assets/730ae4dc-c9ba-45c7-a76e-12a7efeae191)
 
-What We Did:
-We continued working on the code started in week 39.
-Initially, the program was not runnable, but Vivienne, Hande, and Sami worked in parallel to make it functional.
-The code had minor errors — a few issues in the output and a missing Transaction class.
-Once all errors were fixed and Sepideh added the Transaction class, the code finally worked as expected.
-We then merged all working parts successfully.
+### User Dashboard
+![User View](https://github.com/user-attachments/assets/329a044d-b577-4d08-9542-93b54d33dd2b)
 
-Afterward, we began planning for week 40.
-We realized that most of the week 40 tasks were already implemented, except for adding a Dictionary to the Bank class and creating two subclasses that inherit from Account: SavingsAccount and CheckingAccount.
-Once those were completed, we proceeded with the week 41 plan.
-Vivienne and Hande refactored several classes to use different data structures (previously we mostly used List<>).
+### Account Management
+![Account Management](https://github.com/user-attachments/assets/08b84e4b-bc70-4c2d-b32e-7ce352a1c21b)
 
-Problems / Blockers:
-We were slightly behind schedule, so we needed to catch up.
+---
 
-Week 42
-Reporter and Date: Vivienne – 14/10
+## Tech Stack
 
-Participants (attendance): Sami, Sepideh, Hande, Vivienne
+- Language: C# 12
+- Framework: .NET 8
+- Architecture: Layered (Console UI to Services to Data)
+- Task Management: Notion (Backlog & Sprint Planning)
+- Logging: Custom console logging
+- Scheduling: Timer for 15-minute batch transaction processing
 
-Sprint Goal (Definition of Done for the week):
-Refactor Program.cs, Bank.cs, and User.cs. Create Admin class. Implement login system with role check (admin vs. user) for differentiated menus.
+---
 
-Role Distribution:
-Vivienne – Lead refactor and integration
-Hande – Bank and Admin class owner
-Sepideh – User class owner
-Sami – Account class owner
+## Security & Reliability
 
-What We Did:
-Refactored core classes and added login/role-based menus. Sepideh added Password and Role to User. Hande integrated Dictionary/HashSet into Bank, moved admin funcs to new Admin class with ShowLargestTransaction() and TotalBalanceSummary(). Sami explored LINQ in Account. Vivienne updated Bank.OpenAccount to boolean return for error handling; added UserMenu/AdminMenu and login in Program.cs.
+- Login lockout after 3 failed attempts
+- Input validation on all user entries
+- Transaction safety via batch processing
+- Audit trail with full transaction history
+- Role-based access control
 
-Problems / Blockers:
-Time constraints limited full implementation of all planned methods.
+---
 
-Week 43
-Reporter and Date: Hande -21/10
+## Future Enhancements (Backlog Ideas)
 
-Participants (attendance): Vivienne, Sami, Sepideh and Hande
+- Persistent storage with SQL Server / EF Core
+- Web API + Blazor frontend
+- Real-time exchange rate API integration
+- Deposit maturity & compound interest
+- Email/SMS notifications
+- Unit tests with xUnit
 
-Sprint Goal (Definition of Done for the week):
-Refactor Program.cs, Bank.cs, and Admin.cs to separate business logic from UI, create AccountRepository for transaction and account management with filtering and last-N functionality, implement login with role-based menus, restrict Admin and User access appropriately. Refactor classes SavingsAccount and CheckingAccount and implement SavingsAccount with 3 free withdrawals then fees, and CheckingAccount allowing overdraft up to a set limit.
+---
 
-Role Distribution:
-Vivienne – Responsible for code
-Hande – Responsible for merging and reporter
-Sepideh – Demo 
-Sami – Demo
+## Team & Process
 
-What We Did:
-Hande:Refactored Bank.cs, and Admin.cs.Created AccountRepository for transaction and account management, including last-N transactions and type-based filtering.
-Vivienne:Implemented SavingsAccount with 3 free withdrawals then fees, and CheckingAccount allowing overdraft up to a set limit.Modified the Withdraw function in Account class to support different account types.Refactored the whole menu for main in order to match the changes made to other classes.
-Sami och Sepideh: Worked on demonstrating the project and preparing the demo presentation.
+- Team Size: 3 members
+- Methodology: Agile-inspired (sprints, backlog grooming, retros)
+- Tools: Git, Notion, VS Code / Visual Studio
+- Code Reviews: Pull requests & pair programming
 
-Problems / Blockers:
-Hande: Uncertainty about the SearchAccount method: instructions said “Search account by account number or username and display in table format,” and it was unclear whether to show all users with the same name or just one, so implemented it to display all users with matching names in case there are any. Unsure where to create the Repositories folder for AccountRepository, since there are multiple folders like ConsoleUI (Program.cs) and Core (all classes). Was unclear if it should go inside Core or as a separate folder. Ended up creating it under Core folder. Lack of time.
-Vivienne: The Account class was not flexible enough for all inherited classes. Our code didn’t fully follow SOLID principles, which caused issues as the project grew and now requires refactoring. Lack of time; too much to do in a short period.
+---
 
-Week 44
-Reporter and Date: Vivienne – 28/10
-Participants (attendance): Hande, Vivienne, and Sepideh
-Sprint Goal (Definition of Done for the week): Refactor existing codebase and implement functionality based on backlog tasks. Ensure code structure follows SOLID principles and improve separation of concerns between UI, services, and core logic.
+## How to Run
 
-Role Distribution:
-Vivienne – Refactorer (responsible for general code refactoring, primarily within the ConsoleUI folder)
-Hande – Refactorer of Admin class and AccountService class
-Sepideh – Responsible for LoginService class and LoginUI class implementation
+1. Clone the repository
+2. Open in Visual Studio or VS Code
+3. Restore NuGet packages
+4. Run `dotnet run` in the project directory
 
-What We Did:
-Vivienne: Refactored the code, focusing mainly on the ConsoleUI folder to improve structure and adherence to SOLID principles.
-Hande: Refactored the Admin class and moved its methods into a newly created AccountServices class to achieve better separation of concerns.
-Sepideh: Implemented the LoginService and LoginUI classes to enable user login functionality.
+Default admin: `admin` / `admin123`  
+Sample user: `john` / `pass123`
 
-Problems / Blockers:
-The existing codebase was poorly structured, making it difficult to add new functionality and significantly complicating the refactoring process.
+---
+
+## License
+
+Educational project not for production use.
+
+---
+
+Developed as part of a .NET 8 course Fall 2025
+```
+```
